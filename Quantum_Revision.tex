@@ -93,9 +93,26 @@ The probabilities in this formalism are defined by
   &= \abs{\bra{f}\ket{1}\bra{1}\ket{i}}^2 + \abs{\bra{f}\ket{2}\bra{2}\ket{i}} + 2 \Re(\bra{f}\ket{1}\bra{1}\ket{i}^\ast \bra{f}\ket{2}\bra{2}\ket{i})
 \end{align*}
 where the completeness of the Hilbert space has been used.
-This asserts that \[ \hat{\mathbbm{1}} = \sum_{\text{states}\, k} \ket{k}\bra{k}\] where \( \ket{k}\in\mathcal{H} \) are orthonormal basis vectors.
+This asserts that \[ \hat{\mathbbm{1}} = \sum_{\text{states}\, k} \dyad{k}\] where \( \ket{k}\in\mathcal{H} \) are orthonormal basis vectors.
 This is what is meant by ``inserting a complete set of states''.
+Othonormality of discrete eigenvectors (eignfunctions, eigenstates\ldots) is defined by \[ \braket{n}{m} = \delta_{mn}\] and in the continuous limit is defined by \[\braket{x}{x^\prime} \delta(x-x^\prime).\]
 
-\section{Observables}
+\section{Operators and Observables}
+An observable \(\hat\xi = \sum_n \xi_n \op{n}\) is an operator which satisfies the following properties:
+\begin{enumerate}
+  \item That there are states \(\ket{n}\) which are eigenstates of $\hat \xi$ such that $\xi_n \in \mathbb{R}$ are the eigenvalues.
+  This comes from the spectral theorem and representation.
+  \item It is hermitian, that is to say \[\mel{\phi}{\hat\xi^\dagger}{\psi} =\mel{\phi}{\hat\xi}{\psi}\] which requires that the eigenvalues $\xi_n$ are real.
+  \item It is complex-linear, such that \[ \hat\xi(c_1 \ket{\psi_1} + c_2 \ket{\psi_2} ) = c_1\hat\xi \ket{\psi_1} + c_2\hat\xi \ket{\psi_2} \] for $c_i \in \mathbb{C}$. This comes from the definition of the Hilbert space.
+  \item It commutes with other observables, such that if $\hat{\chi}$ is an observable, then $\commutator{\hat\chi}{\hat\xi}=0$.
+\end{enumerate}
+
+When we measure an observable, we get a collapse of the quantum states.
+This is shown through the use of the \emph{projection} operator, \[\hat{P}_n = \ketbra{n}\] which has the effect of throwing away all other states in a composite state.
+For example, \[ \hat{P}_1 (c_1\ket{1} + c_2\ket{2}) = c_1\ket{1}\braket{1} + c_2\ket{1}\bra{1}\ket{2} = c_1 \ket{1} \] which seems nice and obvious in the maths, but the physics behind it is weird.
+
+Degeneracy also makes this weird, but fundamentally it's just adding in more sums until everything is nicely in one state.
+
+
 
 \end{document}
