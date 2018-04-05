@@ -8,6 +8,7 @@
 \usepackage{amsfonts}
 \usepackage{relsize}
 \usepackage{booktabs}
+\usepackage{bbm}
 \KOMAoption{chapterprefix}{true}
 
 \KOMAoptions{
@@ -74,7 +75,7 @@ DIV=12
 \tableofcontents % prints Table of Contents
 
 \part{Back to Basics --- Quantum Mechanics Style}
-\chapter{Tiny Little Things Sort Of Moving Around Not Actually That Fast}
+\chapter{Tiny Little Things Sort Of Moving Around Not Actually That Fast\ldots{} Maybe}
 \section{Double Slit Experiment}
 
 The double slit experiment demonstrates some of the most important points of quantum mechanics.
@@ -82,5 +83,19 @@ Feynman was a particular fan of it. We make $P_1 = \abs{\phi_1}^2$ the probabili
 Classically, we'd expect that $$P_{1\text{ or }2} = P_1 + P_2 = \abs{\phi_1}^2 + \abs{\phi_2}^2,$$ which is all well and good but isn't what happens when we approach the quantum world.
 
 We define two states, $\ket{i}$ and $\ket{f}$, the initial and final states, and two intermediate states $\ket{1}, \ket{2} \in \mathcal{H}$ for each of the slits.
-These are vectors in a Hilbert space, and as such are linear superposable and
+These are vectors in a Hilbert space, and as such are linear superposable and have dual basis vectors $\bra{i}, \bra{f}, \bra{1}, \bra{2} \in \mathcal{H}^\ast$.
+These define the normalisation ($\braket{\psi} = 1$) and are used to great effect elsewhere.
+
+The probabilities in this formalism are defined by
+\begin{align*}
+  P(i \to f) &= \abs{\bra{f}\ket{i}}^2\\
+   &= \abs{\bra{f}\ket{1}\bra{1}\ket{i} + \bra{f}\ket{2}\bra{2}\ket{i}}^2\\
+  &= \abs{\bra{f}\ket{1}\bra{1}\ket{i}}^2 + \abs{\bra{f}\ket{2}\bra{2}\ket{i}} + 2 \Re(\bra{f}\ket{1}\bra{1}\ket{i}^\ast \bra{f}\ket{2}\bra{2}\ket{i})
+\end{align*}
+where the completeness of the Hilbert space has been used.
+This asserts that \[ \hat{\mathbbm{1}} = \sum_{\text{states}\, k} \ket{k}\bra{k}\] where \( \ket{k}\in\mathcal{H} \) are orthonormal basis vectors.
+This is what is meant by ``inserting a complete set of states''.
+
+\section{Observables}
+
 \end{document}
