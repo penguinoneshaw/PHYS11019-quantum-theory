@@ -74,8 +74,9 @@ DIV=12
 
 \tableofcontents % prints Table of Contents
 
-\part{Back to Basics --- Quantum Mechanics Style}
-\chapter{Tiny Little Things Sort Of Moving Around Not Actually That Fast\ldots{} Maybe}
+\part{Tiny Little Things Sort Of Moving Around Not Actually That Fast\ldots{} Maybe}
+
+\chapter{Back to Basics --- Quantum Mechanics Style}
 \section{Double Slit Experiment}
 
 The double slit experiment demonstrates some of the most important points of quantum mechanics.
@@ -97,6 +98,8 @@ This asserts that \[ \hat{\mathbbm{1}} = \sum_{\text{states}\, k} \dyad{k}\] whe
 This is what is meant by ``inserting a complete set of states''.
 Othonormality of discrete eigenvectors (eignfunctions, eigenstates\ldots) is defined by \[ \braket{n}{m} = \delta_{mn}\] and in the continuous limit is defined by \[\braket{x}{x^\prime} \delta(x-x^\prime).\]
 
+We can change the basis of a set of states with \[\ket{\bar{n}} = \sum_{m} \ket{m}\braket{m}{\bar{n}} \] where \(\braket{m}{n} = U_{mn}\) where $U \in \mathrm{SL}(n)$.
+
 \section{Operators and Observables}
 An observable \(\hat\xi = \sum_n \xi_n \op{n}\) is an operator which satisfies the following properties:
 \begin{enumerate}
@@ -113,6 +116,37 @@ For example, \[ \hat{P}_1 (c_1\ket{1} + c_2\ket{2}) = c_1\ket{1}\braket{1} + c_2
 
 Degeneracy also makes this weird, but fundamentally it's just adding in more sums until everything is nicely in one state.
 
+\section{Squish It All Together}
+We move to the continuous variables of position and momentum space.
 
+\subsection{Position}
+Position space is defined such that \[ \int_a^b \psi(x) \ket{x} \dd{x}\] with the orthonormality condition \[\braket{x}{x^\prime}=\delta(x-x^\prime). \]
+This means we can define the projection on to position space as a function of the position, i.e.~\[\braket{x}{\psi} = \psi(x).\]
+The position operator is then \[ \hat{x} = \int x \ketbra{x} \dd{x} \] which is also known as the spectral resolution, and we've used the continuum analogue of the identity operator
+\[ \hat{\mathbbm{1}} = \int \ketbra{x}\dd{x}. \]
 
+\subsection{Momentum}
+We use the fourier transform to find the momentum space.
+We define states \(\ket{k}\) such that \[ \ket{k} = \frac{1}{\sqrt{2\pi}} \int e^{ikx} \ket{k} \dd{x}\] which allows us to make the identifications
+\begin{align*}
+  \braket{x}{k} &= \frac{1}{\sqrt{2\pi}}e^{ikx} & \braket{k}{x} &= \frac{1}{\sqrt{2\pi}}e^{-ikx}
+\end{align*}
+which shows that it is a unitary transformation between bases.
+
+It's worth noting that \[ \tilde\psi(k) = \mathcal{F}\qty[\psi(x)].\]
+
+\subsection{Working Between The Two}
+We use Feynman's trick to find the action of the momentum operator on the position basis, given by
+\begin{align*}
+  \hat{k} \ket{x} &= \frac{1}{\sqrt{2\pi}} \int k e^{-ikx} \ket{k} \dd{k}\\
+  &= \frac{i}{\sqrt{2\pi}} \pdv{x} \int e^{-ikx} \ket{k} \dd{k}\\
+  &= i \pdv{x} \ket{x}
+\end{align*}
+which gives us the final results
+\begin{align*}
+  \mel{x}{\hat{k}}{\psi} &= -i\pdv{x} \psi & \mel{k}{\hat{x}}{\tilde\psi} &= i\pdv{k}\tilde\psi.
+\end{align*}
+
+\subsection{Canonical Commutation Relation}
+The fundamental result of quantum mechanics is given by the 
 \end{document}
