@@ -57,6 +57,7 @@ DIV=12
 \newmdenv[frametitle=Example,roundcorner=5pt]{example}
 \newmdenv[frametitle=Note,roundcorner=5pt]{note}
 \renewcommand\hbar\hslash
+\newcommand{\DD}[1]{\ensuremath{\,\mathcal{D} #1\,}}
 
 \title{Quantum Theory}
 \subtitle{Integrals. SO MANY INTEGRALS.}
@@ -119,6 +120,7 @@ Degeneracy also makes this weird, but fundamentally it's just adding in more sum
 
 \section{Squish It All Together}
 We move to the continuous variables of position and momentum space.
+This is equivalent to having infinite slits in your diffraction grating.
 
 \subsection{Position}
 Position space is defined such that \[ \int_a^b \psi(x) \ket{x} \dd{x}\] with the orthonormality condition \[\braket{x}{x^\prime}=\delta(x-x^\prime). \]
@@ -150,4 +152,24 @@ which gives us the final results
 
 \subsection{Canonical Commutation Relation}
 The fundamental result of quantum mechanics is given by the canonical commutation relation, \[ \commutator{\hat{x}}{\hat{k}} = i \] which more practically is used as \[\commutator{\hat{x}}{\hat{p}} = i\hbar. \]
+
+\section{Time is a Continuum. Lunchtime doubly so}
+We now increase the number of gratings, and take it to its continuum limit.
+Firstly, we define a system with \(N\) gratings arranged one after another.
+This gives us states \( \ket{x_i, t_i} \) where the \(i\) labels the grating, so \(t_i\) is the time the \(i\)-th grating is passed.
+Using the Hilbert completeness relation, this gives us for \(N=1\) \[\braket{f}{i} = \int \braket{f}{x_1,t_1} \braket{x_1,t_1}{i}\dd{x_1}.\]
+Increasing \(N\) further gives us \[\braket{f}{i} = \idotsint \braket{f}{x_1,t_1} \braket{x_1,t_1}{x_2,t_2} \bra{x_2, t_2}\cdots\ket{x_n,t_n}\braket{x_n, t_n}{f}\dd{x_1}\cdots\dd{x_n}\] where the increasing number of integrals increases the precision, but makes actual calculations difficult.
+
+Defining \(\ket{i} = \ket{x_0, t_0} \) and \( \ket{f} = \ket{x_{N+1}, t_{N+1}} \) allows us to evenly space the gratings a distance \( \varepsilon \) from each other with
+\begin{alignat*}{3}
+  t_n &= t_0 + n\varepsilon & \qquad \text{where}&\qquad& \varepsilon &= \frac{t_{N+1} - t_0}{N+1}
+\end{alignat*}
+which then allows us to write the transition amplitude as
+\begin{align*}
+  \braket{x_b, t_b}{x_a, t_a} &= \qty(\prod_{n=1}^{N}\int\dd{x_n})\qty(\prod_{n=1}^{N+1}\braket{x_{n}, t_{n}}{x_{n-1}, t_{n-1}}).
+\end{align*}
+
+Finally, we define a new measure, which compactifies this notation for the \(\varepsilon \to 0 \) limit.
+This is \[ \braket{x_a, t_a}{x_b, t_b} =  \eval{\int_{x_a}^{x_b}\DD{x}\braket{x_a, t_a}{x_b, t_b}}_{x(t)}. \]
+
 \end{document}
