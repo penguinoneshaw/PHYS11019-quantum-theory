@@ -24,7 +24,7 @@ DIV=12
 }
 
 \renewcommand*\raggedchapter{\centering}
-\RedeclareSectionCommand[beforeskip=0pt,afterskip=2\baselineskip]{chapter}
+\RedeclareSectionCommand[beforeskip=0pt,afterskip=1\baselineskip]{chapter}
 \setkomafont{chapterprefix}{\normalsize\mdseries}
 
 \renewcommand*{\chapterformat}{%
@@ -211,6 +211,7 @@ Ideally, it should make the entire thing converge, but we now need to find what 
 
 \appendix
 \chapter{Gaussian Integrals}
+\section{Basic Gaussians}
 Lots of Gaussian integrals happen in this subject. In the interests of not getting stuck, here are the results.
 
 The basic Gaussian integral for \( a \in \mathbb{R}^+\) is
@@ -236,4 +237,23 @@ By closing one's contour cleverly, one can also solve Fresnel (and similar) inte
   &= \sqrt\frac{i\pi}{a} e^{\nicefrac{-k^2}{4a}}
 \end{align*}
 which is the same as what you get if you just substitute into the previous result, but it's not obvious that that should be the case.
+
+\section{Nested Gaussians}
+When it is said that there are a lot of Gaussians, what makes it all the harder is that they all happen \emph{all at once}.
+
+Firstly, we look at a double Gaussian, in the form
+\begin{align*}
+  I &= \int_{-\infty}^\infty e^{\nicefrac{i}{a} {(x-u)^2}}e^{ \nicefrac{i}{b}(u-y)^2}\dd{u}
+\end{align*}
+which is a bit tricky because they're coupled.
+We use a clever trick, by which we use the translational invariance of these integrals, making a mapping \( u \mapsto u + y \) which makes the whole thing a function of \( z = x - y \).
+Utilising this gives us
+\begin{align*}
+  \frac{i}{a}(z-u)^2 + \frac{i}{b}u^2 &= \frac{i}{a}(z^2 - 2zu + u^2) + \frac{i}{b}u^2\\
+  &= i\qty(\frac{1}{a} + \frac{1}{b})\qty(u - \frac{z}{a \qty(\frac{1}{a} + \frac{1}{b})})^2 + \frac{i}{a}z^2 + i \frac{z^2}{a^2 \qty(\frac{1}{a}  + \frac{1}{b})}\\
+  &= i\qty(\frac{1}{a} + \frac{1}{b})\qty(u - \frac{z}{ia \qty(\frac{1}{a} + \frac{1}{b})})^2 + iz^2\frac{1}{a + b}
+\end{align*}
+which with another translation gives us the really nice answer that \[ I = e^{i\frac{z^2}{a + b}} \sqrt{\frac{iab\pi}{a+b}}.\]
+
+The $N$-th nested Gaussian, \( I_N \), is the logical extension of this, and telescopes rather nicely.
 \end{document}
