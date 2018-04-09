@@ -13,7 +13,7 @@
 
 \KOMAoptions{
 paper=a4,
-fontsize=12pt,
+fontsize=11pt,
 parskip=half-,
 BCOR=.5cm,
 pagesize=auto,
@@ -57,7 +57,7 @@ DIV=12
 \newmdenv[frametitle=Example,roundcorner=5pt]{example}
 \newmdenv[frametitle=Note,roundcorner=5pt]{note}
 \renewcommand\hbar\hslash
-\newcommand{\DD}[1]{\ensuremath{\,\mathcal{D} #1\,}}
+\newcommand{\DD}[1]{\ensuremath{\mathcal{D} #1\,}}
 
 \title{Quantum Theory}
 \subtitle{Integrals. SO MANY INTEGRALS.}
@@ -114,7 +114,7 @@ An observable \(\hat\xi = \sum_n \xi_n \op{n}\) is an operator which satisfies t
 
 When we measure an observable, we get a collapse of the quantum states.
 This is shown through the use of the \emph{projection} operator, \[\hat{P}_n = \ketbra{n}\] which has the effect of throwing away all other states in a composite state.
-For example, \[ \hat{P}_1 (c_1\ket{1} + c_2\ket{2}) = c_1\ket{1}\braket{1} + c_2\ket{1}\bra{1}\ket{2} = c_1 \ket{1} \] which seems nice and obvious in the maths, but the physics behind it is weird.
+For example, \[ \hat{P}_1 (c_1\ket{1} + c_2\ket{2}) = c_1\ket{1}\braket{1} + c_2\ket{1}\bra{1}\ket{2} = c_1 \ket{1} \] which seems nice and obvious in the maths, but the physics behind it is \emph{weird}.
 
 Degeneracy also makes this weird, but fundamentally it's just adding in more sums until everything is nicely in one state.
 
@@ -175,12 +175,39 @@ This is \[ \braket{x_a, t_a}{x_b, t_b} =  \eval{\int_{x_a}^{x_b}\DD{x}\braket{x_
 \chapter{Moving All The Things Around On A Path We're Not Quite Sure Of}
 \section{Classically Speaking, Actions Are Awkward}
 The Lagrangian definition of the action is \[ S[x(t)] = \int_{t_a}^{t_b} L(x, \dot{x}, t) \dd{t} \]
-where \(L = T-V \) is the classical Lagrangian (of a point particle in some generalised co-ordinate) and \(S[x(t)]\) is a functional of the position.
+where \(L = T-V \) is the classical Lagrangian (of a point particle in some generalised co-ordinate) and \(S[x(t)]\) is a functional of the position. We also have canonical momenta \[ p = \pdv{L}{\dot{x}} \] which coincide with regular momenta in most cases, rather like the energy function.
 
 We define the functional derivative
-\[ \eval{\frac{\delta S}{\delta x}}_{x = \bar x} = 0 \] which is a statement of Hamilton's principle, defining the classical trajectory where the endpoints are fixed. What it actually \emph{means} is that we vary the action along a path by an infinitessimal using \[ \delta S = S[x + \delta x] - S[x] \] and Taylor expand. This leads to the Euler-Lagrange equation for the classical trajectory, \[ \dv{t}(\pdv{L}{\dot x}) - \pdv{L}{x} = 0 \] which defines the classical trajectory \(\bar{x} \) on which the \emph{classical action} \(S_{cl} = S[\bar x(t)]\) is defined. This will come back later.
+\[ \eval{\frac{\delta S}{\delta x}}_{x = \bar x} = 0 \] which is a statement of Hamilton's principle, defining the classical trajectory where the endpoints are fixed. What it actually \emph{means} is that we vary the action along a path by an infinitessimal using \[ \delta S = S[x + \delta x] - S[x] \] and Taylor expand. This leads to the Euler-Lagrange equation for the classical trajectory, \[ \dv{t}(\pdv{L}{\dot x}) - \pdv{L}{x} = 0 \] which defines the classical trajectory \(\bar{x} \) on which the \emph{classical action}
+\(S_{cl} = S[\bar x(t)]\) is defined. This will come back later.
 
-\section{Here Comes The Irish With Their Principle Functions}
+\section{Here Come The Irish With Their Principle Functions}
+If we don't fix the later-in-time endpoint in space, we derive Hamilton's principle function.
+The variation of \( (x_b, t_b) \mapsto (x_b, t_b) + (\delta x_b, \delta t_b)\) (where we then take \(\variation{t_b} = 0\)) gives us that this variation is \begin{align*}
+  \variation{S_{cl}} &= \eval{\pdv{L}{\dot{x}}\variation{x}}^{t_b}\\
+  &= p(t_b)\variation{x}\\
+  \implies \pdv{S_{cl}}{x} &= p_b.
+\end{align*}
+
+Doing the equivalent variation for variation-in-time for the endpoint in space, we get the Hamilton-Jacobi equation for the Hamiltonian, \[\variation{S_{cl} = - E_b \variation{t_b}}\] or otherwise written,
+\[E(x_b, \pdv{S_{cl}}{x_b}, t_b) + \pdv{S_{cl}}{t_b} = 0\] which \emph{defines} Hamilton's principle function, which we've suspiciously also named \(S_{cl}\).
+
+\section{Just how probable are these paths, then?}
+We go back to the transition amplitudes.
+Through some slightly iffy arguments involving ``intuition'', we define the path amplitudes as
+\begin{align*}
+  \eval{\braket{x_a, t_a}{x_b, t_b}}_{x(t)} &\sim \exp[i\int_{t_a}^{t_b} \!\!\!\phi(x, \dot x, t) \dd{t}]\\
+  &= e^{\nicefrac{i}{\hbar} S[x(t)]}.
+\end{align*}
+which we can get an expression for the full transition with
+\begin{align*}
+  \braket{x_b, t_b}{x_a, t_a} &= \int_{x_a}^{x_b}\!\DD{x} e^{\nicefrac{i}{\hbar} S[x(t)]}.
+\end{align*}
+
+Now, this still has the funny \(\DD{x}\) thing, which is defined as
+\[\int_{x_a}^{x_b}\!\DD{x} = \lim_{N\to \infty} A_N \prod_{n=1}^N \int_{-\infty}^{\infty} \dd{x_{n}} \] where \(A_N = (\nu(\varepsilon))^{N+1}\) is a normalisation factor equal across each discrete step.
+Ideally, it should make the entire thing converge, but we now need to find what \(\nu(\varepsilon)\) is.
+
 
 
 \end{document}
