@@ -209,5 +209,31 @@ Now, this still has the funny \(\DD{x}\) thing, which is defined as
 Ideally, it should make the entire thing converge, but we now need to find what \(\nu(\varepsilon)\) is.
 
 
+\appendix
+\chapter{Gaussian Integrals}
+Lots of Gaussian integrals happen in this subject. In the interests of not getting stuck, here are the results.
 
+The basic Gaussian integral for \( a \in \mathbb{R}^+\) is
+\[ \int_\mathbb{R} e^{-ax^2} \dd{x} = \sqrt\frac{\pi}{a} \] which we can then use Feynman's trick of differentiation with respect to the parameter and symmetry arguments to find
+\begin{align*}
+  \int_\mathbb{R} x^n e^{-ax^2} \dd{x} &= \begin{cases}
+    \pdv[\nicefrac{n}{2}]{a} \sqrt\frac{\pi}{a} & \text{if \(n\) even}\\
+    0 & \text{otherwise}
+  \end{cases}.
+\end{align*}
+
+If there is an \(e^{bx} \) power, this may be taken care of using completing the square, given
+\begin{align*}
+  \int_\mathbb{R} e^{-ax^2+bx} \dd{x} &= \int_\mathbb{R} e^{-a(x - \nicefrac{b}{2a})^2+\nicefrac{b^2}{4a}} \dd{x}\\
+  &= \sqrt\frac{\pi}{a} e^{\nicefrac{b^2}{4a}}
+\end{align*}
+and if we make \(b = ik\) this still works, which shows that the fourier transform of a Gaussian is still a Gaussian.
+With these, Feynman's trick still works, and works even better than before as we now have single \(x\) powers to play with --- just keep differentiating.
+
+By closing one's contour cleverly, one can also solve Fresnel (and similar) integrals with a complex integrand. This gives
+\begin{align*}
+  \int_\mathbb{R} e^{-iax^2+ikx} \dd{x}
+  &= \sqrt\frac{i\pi}{a} e^{\nicefrac{-k^2}{4a}}
+\end{align*}
+which is the same as what you get if you just substitute into the previous result, but it's not obvious that that should be the case.
 \end{document}
