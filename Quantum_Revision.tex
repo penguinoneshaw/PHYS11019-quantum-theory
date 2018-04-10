@@ -238,7 +238,7 @@ By closing one's contour cleverly, one can also solve Fresnel (and similar) inte
 \end{align*}
 which is the same as what you get if you just substitute into the previous result, but it's not obvious that that should be the case.
 
-\section{Nested Gaussians}
+\section{Nested Gaussians}\label{sec:nested-gaussians}
 When it is said that there are a lot of Gaussians, what makes it all the harder is that they all happen \emph{all at once}.
 
 Firstly, we look at a double Gaussian, in the form
@@ -256,4 +256,10 @@ Utilising this gives us
 which with another translation gives us the really nice answer that \[ I = e^{i\frac{z^2}{a + b}} \sqrt{\frac{iab\pi}{a+b}}.\]
 
 The $N$-th nested Gaussian, \( I_N \), is the logical extension of this, and telescopes rather nicely.
+We set
+\begin{align*}
+  I_N &= \idotsint \dd{x_1} \cdots \dd{x_N} \exp(i \qty[ (x_1 - x_0 )^2 + (x_2 - x_1)^2 + \ldots + (x_{N+1} - x_{N})^2])\\
+      &= \sqrt{\frac{i\pi}{2}}\idotsint \dd{x_2} \cdots \dd{x_N} \exp(i \qty[ \nicefrac{1}{2}(x_2 - x_0 )^2 + (x_2 - x_1)^2 + \ldots + (x_{N+1} - x_{N})^2])\\
+      &= \sqrt{\frac{i\pi}{N+1}}\exp(i \nicefrac{(x_{N+1} - x_0)^2}{N+1})
+\end{align*}
 \end{document}
