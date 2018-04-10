@@ -1,0 +1,54 @@
+\appendix
+\chapter{Gaussian Integrals}
+\section{Basic Gaussians}
+Lots of Gaussian integrals happen in this subject. In the interests of not getting stuck, here are the results.
+
+The basic Gaussian integral for \( a \in \mathbb{R}^+\) is
+\[ \int_\mathbb{R} e^{-ax^2} \dd{x} = \sqrt\frac{\pi}{a} \] which we can then use Feynman's trick of differentiation with respect to the parameter and symmetry arguments to find
+\begin{align*}
+  \int_\mathbb{R} x^n e^{-ax^2} \dd{x} &= \begin{cases}
+    \pdv[\nicefrac{n}{2}]{a} \sqrt\frac{\pi}{a} & \text{if \(n\) even}\\
+    0 & \text{otherwise}
+  \end{cases}.
+\end{align*}
+
+If there is an \(e^{bx} \) power, this may be taken care of using completing the square, given
+\begin{align*}
+  \int_\mathbb{R} e^{-ax^2+bx} \dd{x} &= \int_\mathbb{R} e^{-a(x - \nicefrac{b}{2a})^2+\nicefrac{b^2}{4a}} \dd{x}\\
+  &= \sqrt\frac{\pi}{a} e^{\nicefrac{b^2}{4a}}
+\end{align*}
+and if we make \(b = ik\) this still works, which shows that the fourier transform of a Gaussian is still a Gaussian.
+With these, Feynman's trick still works, and works even better than before as we now have single \(x\) powers to play with --- just keep differentiating.
+
+By closing one's contour cleverly, one can also solve Fresnel (and similar) integrals with a complex integrand. This gives
+\begin{align*}
+  \int_\mathbb{R} e^{-iax^2+ikx} \dd{x}
+  &= \sqrt\frac{i\pi}{a} e^{\nicefrac{-k^2}{4a}}
+\end{align*}
+which is the same as what you get if you just substitute into the previous result, but it's not obvious that that should be the case.
+
+\section{Nested Gaussians}\label{sec:nested-gaussians}
+When it is said that there are a lot of Gaussians, what makes it all the harder is that they all happen \emph{all at once}.
+
+Firstly, we look at a double Gaussian, in the form
+\begin{align*}
+  I &= \int_{-\infty}^\infty e^{\nicefrac{i}{a} {(x-u)^2}}e^{ \nicefrac{i}{b}(u-y)^2}\dd{u}
+\end{align*}
+which is a bit tricky because they're coupled.
+We use a clever trick, by which we use the translational invariance of these integrals, making a mapping \( u \mapsto u + y \) which makes the whole thing a function of \( z = x - y \).
+Utilising this gives us
+\begin{align*}
+  \frac{i}{a}(z-u)^2 + \frac{i}{b}u^2 &= \frac{i}{a}(z^2 - 2zu + u^2) + \frac{i}{b}u^2\\
+  &= i\qty(\frac{1}{a} + \frac{1}{b})\qty(u - \frac{z}{a \qty(\frac{1}{a} + \frac{1}{b})})^2 + \frac{i}{a}z^2 + i \frac{z^2}{a^2 \qty(\frac{1}{a}  + \frac{1}{b})}\\
+  &= i\qty(\frac{1}{a} + \frac{1}{b})\qty(u - \frac{z}{ia \qty(\frac{1}{a} + \frac{1}{b})})^2 + iz^2\frac{1}{a + b}
+\end{align*}
+which with another translation gives us the really nice answer that \[ I = e^{i\frac{z^2}{a + b}} \sqrt{\frac{iab\pi}{a+b}}.\]
+
+The $N$-th nested Gaussian, \( I_N \), is the logical extension of this, and telescopes rather nicely.
+We set
+\begin{align*}
+  I_N &= \idotsint \dd{x_1} \cdots \dd{x_N} \exp(i \qty[ (x_1 - x_0 )^2 + (x_2 - x_1)^2 + \ldots + (x_{N+1} - x_{N})^2])\\
+      &= \sqrt{\frac{i\pi}{2}}\idotsint \dd{x_2} \cdots \dd{x_N} \exp(i \qty[ \nicefrac{1}{2}(x_2 - x_0 )^2 + (x_2 - x_1)^2 + \ldots + (x_{N+1} - x_{N})^2])\\
+      &= \sqrt{\frac{i\pi}{N+1}}\exp(i \nicefrac{(x_{N+1} - x_0)^2}{N+1})
+\end{align*}
+which is a nice enough statement.

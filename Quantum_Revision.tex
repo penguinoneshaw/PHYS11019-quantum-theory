@@ -1,7 +1,7 @@
 \documentclass[]{scrreprt}
 \usepackage{graphicx}
 \usepackage[arrowdel]{physics}
-\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks, pdfusetitle]{hyperref}
 \usepackage{nicefrac}
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -9,6 +9,10 @@
 \usepackage{relsize}
 \usepackage{booktabs}
 \usepackage{bbm}
+\usepackage{cancel}
+\usepackage[sorting=none,bibencoding=utf8,style=authoryear,giveninits,uniquename=init]{biblatex}
+\addbibresource{QT.bib}
+
 \KOMAoption{chapterprefix}{true}
 
 \KOMAoptions{
@@ -38,7 +42,6 @@ DIV=12
 \usepackage{mathtools}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-\DeclarePairedDelimiter\integerpart{[}{]}
 \usepackage{mathrsfs}
 \newcommand{\fourier}[1]{\ensuremath{\mathlarger{\mathcal{F}}\!\!\left[#1 \right]}}
 \newcommand{\inversefourier}[1]{\ensuremath{\mathlarger{\mathcal{F}^{-1}}\!\!\left[#1 \right]}}
@@ -52,7 +55,7 @@ DIV=12
 \usepackage{newpxmath}
 \setkomafont{descriptionlabel}{\rmfamily\bfseries}
 \linespread{1.05}
-\setcounter{tocdepth}{1}
+%\setcounter{tocdepth}{1}
 \usepackage[tikz]{mdframed}
 \newmdenv[frametitle=Example,roundcorner=5pt]{example}
 \newmdenv[frametitle=Note,roundcorner=5pt]{note}
@@ -179,18 +182,18 @@ where \(L = T-V \) is the classical Lagrangian (of a point particle in some gene
 
 We define the functional derivative
 \[ \eval{\frac{\delta S}{\delta x}}_{x = \bar x} = 0 \] which is a statement of Hamilton's principle, defining the classical trajectory where the endpoints are fixed. What it actually \emph{means} is that we vary the action along a path by an infinitessimal using \[ \delta S = S[x + \delta x] - S[x] \] and Taylor expand. This leads to the Euler-Lagrange equation for the classical trajectory, \[ \dv{t}(\pdv{L}{\dot x}) - \pdv{L}{x} = 0 \] which defines the classical trajectory \(\bar{x} \) on which the \emph{classical action}
-\(S_{cl} = S[\bar x(t)]\) is defined. This will come back later.
+\(S_{\mathrm{cl}} = S[\bar x(t)]\) is defined. This will come back later.
 
 \section{Here Come The Irish With Their Principle Functions}
 If we don't fix the later-in-time endpoint in space, we derive Hamilton's principle function.
 The variation of \( (x_b, t_b) \mapsto (x_b, t_b) + (\delta x_b, \delta t_b)\) (where we then take \(\variation{t_b} = 0\)) gives us that this variation is \begin{align*}
-  \variation{S_{cl}} &= \eval{\pdv{L}{\dot{x}}\variation{x}}^{t_b}\\
+  \variation{S_{\mathrm{cl}}} &= \eval{\pdv{L}{\dot{x}}\variation{x}}^{t_b}\\
   &= p(t_b)\variation{x}\\
-  \implies \pdv{S_{cl}}{x} &= p_b.
+  \implies \pdv{S_{\mathrm{cl}}}{x} &= p_b.
 \end{align*}
 
-Doing the equivalent variation for variation-in-time for the endpoint in space, we get the Hamilton-Jacobi equation for the Hamiltonian, \[\variation{S_{cl} = - E_b \variation{t_b}}\] or otherwise written,
-\[E(x_b, \pdv{S_{cl}}{x_b}, t_b) + \pdv{S_{cl}}{t_b} = 0\] which \emph{defines} Hamilton's principle function, which we've suspiciously also named \(S_{cl}\).
+Doing the equivalent variation for variation-in-time for the endpoint in space, we get the Hamilton-Jacobi equation for the Hamiltonian, \[\variation{S_{\mathrm{cl}} = - E_b \variation{t_b}}\] or otherwise written,
+\[E(x_b, \pdv{S_{\mathrm{cl}}}{x_b}, t_b) + \pdv{S_{\mathrm{cl}}}{t_b} = 0\] which \emph{defines} Hamilton's principle function, which we've suspiciously also named \(S_{\mathrm{cl}}\).
 
 \section{Just how probable are these paths, then?}
 We go back to the transition amplitudes.
@@ -229,67 +232,47 @@ To do this, we impose the requirement that
 \end{equation}
 
 Now, it can be worked out easily that for a free particle,
-\[ S_{cl} = \frac{m}{2} \frac{(x_b - x_a)^2}{T}\] which is suspiciously similar to \autoref{eqn:free-particle}, so we make an identification that
+\[ S_{\mathrm{cl}} = \frac{m}{2} \frac{(x_b - x_a)^2}{T}\] which is suspiciously similar to \autoref{eqn:free-particle}, so we make an identification that
 \begin{alignat*}{3}
-  \braket{x_b, t_b}{x_a, t_a} &= F_0(T)e^{i\nicefrac{S_{cl}}{\hbar}} & \qq{where} && F_0(T) &= \sqrt{\frac{m}{2\pi i \hbar T}}
+  \braket{x_b, t_b}{x_a, t_a} &= F_0(T)e^{i\nicefrac{S_{\mathrm{cl}}}{\hbar}} & \qq{where} && F_0(T) &= \sqrt{\frac{m}{2\pi i \hbar T}}
 \end{alignat*}
 which is a \emph{very} helpful notation, since the prefactor is now independent of the endpoints.
 
 You may notice that \( \nu(\varepsilon) \) diverges for infinitessimal \(\varepsilon \), which is a little inconvenient, but we basically ignore it, as that choice of \(\nu\) is only the first order term.
 
+\section{Oscillation}
+For a harmonic oscillator, the ``discretize time'' method becomes awkward to do, however, there's another thing we can try.
+Firstly, the Lagrangian for the harmonic oscillator is
+\[ L = \frac{1}{2} m \dot{x}^2 - \frac{1}{2}m \omega x^2\] from which we can calculate the classical action,
+\[ S_{\mathrm{cl}} = \frac{m\omega}{2\sin(\omega T)} [(x_a^2 + x_b^2)\cos(\omega T) - 2x_a x_b]\]
+and the Newtonian equation of motion, \[ \ddot{x} + \omega^2 x = 0. \]
 
-\appendix
-\chapter{Gaussian Integrals}
-\section{Basic Gaussians}
-Lots of Gaussian integrals happen in this subject. In the interests of not getting stuck, here are the results.
-
-The basic Gaussian integral for \( a \in \mathbb{R}^+\) is
-\[ \int_\mathbb{R} e^{-ax^2} \dd{x} = \sqrt\frac{\pi}{a} \] which we can then use Feynman's trick of differentiation with respect to the parameter and symmetry arguments to find
+We will write \( x = \bar{x} + \eta \) where \(\eta(t_a) = \eta(t_b) = 0\) is the deviation from the classical path (allowing us to use the variational principle).
+We find that
 \begin{align*}
-  \int_\mathbb{R} x^n e^{-ax^2} \dd{x} &= \begin{cases}
-    \pdv[\nicefrac{n}{2}]{a} \sqrt\frac{\pi}{a} & \text{if \(n\) even}\\
-    0 & \text{otherwise}
-  \end{cases}.
+  S[x] = S[\bar{x} + \eta] &= \frac{m}{2}\int_{t_a}^{t_b} \qty[ \qty(\dot{\bar{x}} + \dot\eta)^2 - \omega^2(\bar{x} + \eta)^2] \dd{t}\\
+                    &= S[\bar{x}] + S[\eta] + m\int_{t_a}^{t_b} \dot{\bar{x}}\dot\eta - \omega^2\bar{x}\eta\dd{t}\\
+                    &= S[\bar{x}] + S[\eta] + \cancel{m[\eta \dot{\bar{x}}]_{t_a}^{t_b}} - m \int_{t_a}^{t_b}\eta \cancel{(\ddot{\bar{x}} + \omega^2 \bar{x}) }\dd{t}\\
+                    &= S[\bar{x}] + S[\eta]
 \end{align*}
-
-If there is an \(e^{bx} \) power, this may be taken care of using completing the square, given
+which is, in fact, true for any Lagrangian quadratic in \(x\).
+We can also argue that \[ \int_{x_a}^{x_b} \DD{x} = \int_{0}^{0} \DD{\eta}\] since \(\dd{x} = \dd{\eta} \), which looks a bit weird, but it's a useful statement.
+This gives us our transition amplitude
 \begin{align*}
-  \int_\mathbb{R} e^{-ax^2+bx} \dd{x} &= \int_\mathbb{R} e^{-a(x - \nicefrac{b}{2a})^2+\nicefrac{b^2}{4a}} \dd{x}\\
-  &= \sqrt\frac{\pi}{a} e^{\nicefrac{b^2}{4a}}
+  \braket{x_b, t_b}{x_a, t_a} &= \int_{x_a}^{x_b} e^{\nicefrac{i}{\hbar} S[x(t)]} \DD{x}\\
+  &= e^{\nicefrac{i}{\hbar} S_{\mathrm{cl}}} \int_{0}^{0} e^{\nicefrac{i}{\hbar} S[\eta]} \DD{\eta}\\
+  &\equiv F_\omega(T)e^{\nicefrac{i}{\hbar} S_{\mathrm{cl}}}
 \end{align*}
-and if we make \(b = ik\) this still works, which shows that the fourier transform of a Gaussian is still a Gaussian.
-With these, Feynman's trick still works, and works even better than before as we now have single \(x\) powers to play with --- just keep differentiating.
-
-By closing one's contour cleverly, one can also solve Fresnel (and similar) integrals with a complex integrand. This gives
+which various people solve in various ways, such as in \cite{feynman2010quantum}. Apparently the easiest is to do it by inspection, where we notice that since \( F_\omega (T) \) has no position dependence, we can also write it as
 \begin{align*}
-  \int_\mathbb{R} e^{-iax^2+ikx} \dd{x}
-  &= \sqrt\frac{i\pi}{a} e^{\nicefrac{-k^2}{4a}}
+  F_\omega(T) &= \braket{0, T}{0, 0}\\
+              &= \int_\mathbb{R} \bra{0,T}\ket{x,t}\bra{x,t}\ket{0,0} \dd{x}\\
+              &= \int_\mathbb{R} \dd{x} F_\omega(T - t)e^{\nicefrac{i}{\hbar} S_{\mathrm{cl}}(T-t)}\,F_\omega(t)e^{\nicefrac{i}{\hbar} S_{\mathrm{cl}}(t)}\\
+              &= F_\omega(T - t)\, F_\omega(t) \int_\mathbb{R} \dd{x} e^{\nicefrac{i}{\hbar} (S_{\mathrm{cl}}(T-t) + S_{\mathrm{cl}}(t))}
 \end{align*}
-which is the same as what you get if you just substitute into the previous result, but it's not obvious that that should be the case.
+at which point we use the definition of the classical action from earlier, notice that it's quadratic in \(x \) making it all a Fresnel integral, and abuse the nested Gaussians formula from \autoref{sec:nested-gaussians}.
+This gives us
 
-\section{Nested Gaussians}\label{sec:nested-gaussians}
-When it is said that there are a lot of Gaussians, what makes it all the harder is that they all happen \emph{all at once}.
-
-Firstly, we look at a double Gaussian, in the form
-\begin{align*}
-  I &= \int_{-\infty}^\infty e^{\nicefrac{i}{a} {(x-u)^2}}e^{ \nicefrac{i}{b}(u-y)^2}\dd{u}
-\end{align*}
-which is a bit tricky because they're coupled.
-We use a clever trick, by which we use the translational invariance of these integrals, making a mapping \( u \mapsto u + y \) which makes the whole thing a function of \( z = x - y \).
-Utilising this gives us
-\begin{align*}
-  \frac{i}{a}(z-u)^2 + \frac{i}{b}u^2 &= \frac{i}{a}(z^2 - 2zu + u^2) + \frac{i}{b}u^2\\
-  &= i\qty(\frac{1}{a} + \frac{1}{b})\qty(u - \frac{z}{a \qty(\frac{1}{a} + \frac{1}{b})})^2 + \frac{i}{a}z^2 + i \frac{z^2}{a^2 \qty(\frac{1}{a}  + \frac{1}{b})}\\
-  &= i\qty(\frac{1}{a} + \frac{1}{b})\qty(u - \frac{z}{ia \qty(\frac{1}{a} + \frac{1}{b})})^2 + iz^2\frac{1}{a + b}
-\end{align*}
-which with another translation gives us the really nice answer that \[ I = e^{i\frac{z^2}{a + b}} \sqrt{\frac{iab\pi}{a+b}}.\]
-
-The $N$-th nested Gaussian, \( I_N \), is the logical extension of this, and telescopes rather nicely.
-We set
-\begin{align*}
-  I_N &= \idotsint \dd{x_1} \cdots \dd{x_N} \exp(i \qty[ (x_1 - x_0 )^2 + (x_2 - x_1)^2 + \ldots + (x_{N+1} - x_{N})^2])\\
-      &= \sqrt{\frac{i\pi}{2}}\idotsint \dd{x_2} \cdots \dd{x_N} \exp(i \qty[ \nicefrac{1}{2}(x_2 - x_0 )^2 + (x_2 - x_1)^2 + \ldots + (x_{N+1} - x_{N})^2])\\
-      &= \sqrt{\frac{i\pi}{N+1}}\exp(i \nicefrac{(x_{N+1} - x_0)^2}{N+1})
-\end{align*}
-which is a nice enough statement.
+\include{includes/appendices}
+\printbibliography
 \end{document}
