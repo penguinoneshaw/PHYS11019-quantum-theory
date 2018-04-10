@@ -55,7 +55,7 @@ DIV=12
 \usepackage{newpxmath}
 \setkomafont{descriptionlabel}{\rmfamily\bfseries}
 \linespread{1.05}
-%\setcounter{tocdepth}{1}
+
 \usepackage[tikz]{mdframed}
 \newmdenv[frametitle=Example,roundcorner=5pt]{example}
 \newmdenv[frametitle=Note,roundcorner=5pt]{note}
@@ -69,7 +69,7 @@ DIV=12
 \renewcommand{\leq}{\leqslant}
 \renewcommand{\geq}{\geqslant}
 \renewcommand{\vec}{\underline}
-\setcounter{tocdepth}{0}
+\setcounter{tocdepth}{2}
 
 %\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,shrink=10]{microtype}
 \usepackage[activate={true,nocompatibility},kerning=true,spacing=true,final]{microtype}
@@ -78,8 +78,6 @@ DIV=12
 \input{titlepage}
 
 \tableofcontents % prints Table of Contents
-
-\part{Tiny Little Things Sort Of Moving Around Not Actually That Fast\ldots{} Maybe}
 
 \chapter{Back to Basics --- Quantum Mechanics Style}
 \section{Double Slit Experiment}
@@ -175,7 +173,7 @@ which then allows us to write the transition amplitude as
 Finally, we define a new measure, which compactifies this notation for the \(\varepsilon \to 0 \) limit.
 This is \[ \braket{x_a, t_a}{x_b, t_b} =  \eval{\int_{x_a}^{x_b}\DD{x}\braket{x_a, t_a}{x_b, t_b}}_{x(t)}. \]
 
-\chapter{Moving All The Things Around On A Path We're Not Quite Sure Of}
+\chapter{Tiny Little Things Sort Of Moving Around Not Actually That Fast\ldots{} Maybe}
 \section{Classically Speaking, Actions Are Awkward}
 The Lagrangian definition of the action is \[ S[x(t)] = \int_{t_a}^{t_b} L(x, \dot{x}, t) \dd{t} \]
 where \(L = T-V \) is the classical Lagrangian (of a point particle in some generalised co-ordinate) and \(S[x(t)]\) is a functional of the position. We also have canonical momenta \[ p = \pdv{L}{\dot{x}} \] which coincide with regular momenta in most cases, rather like the energy function.
@@ -240,7 +238,7 @@ which is a \emph{very} helpful notation, since the prefactor is now independent 
 
 You may notice that \( \nu(\varepsilon) \) diverges for infinitessimal \(\varepsilon \), which is a little inconvenient, but we basically ignore it, as that choice of \(\nu\) is only the first order term.
 
-\section{Oscillation}
+\section{Oscillation of its own accord}
 For a harmonic oscillator, the ``discretize time'' method becomes awkward to do, however, there's another thing we can try.
 Firstly, the Lagrangian for the harmonic oscillator is
 \[ L = \frac{1}{2} m \dot{x}^2 - \frac{1}{2}m \omega x^2\] from which we can calculate the classical action,
@@ -272,6 +270,23 @@ which various people solve in various ways, such as in \cite{feynman2010quantum}
 \end{align*}
 at which point we use the definition of the classical action from earlier, notice that it's quadratic in \(x \) making it all a Fresnel integral, and abuse the nested Gaussians formula from \autoref{sec:nested-gaussians}.
 This gives us
+\begin{equation*}
+  F_\omega(T) = F_\omega(T - t)\, F_\omega(t) \sqrt{\frac{2\pi i \hbar}{m\omega} \frac{\sin\omega(T-t) \sin\omega t}{\sin \omega T}}
+\end{equation*}
+which we can look at and notice that \( F_\omega (T) \) should probably be
+\[ F_\omega (T) \sqrt{\frac{m\omega}{2\pi i \hbar} \frac{1}{\sin \omega T}} \] if we want the two other terms to cancel out. There's no systematic way of doing this really, though taking the \( T \gg t \) limit should result in the same.
+
+\section{You Have No Choice, Just Oscillate}
+The forced harmonic oscillator has the Lagrangian
+\[ L = \frac{1}{2} m (\dot{x}^2 - \omega^2 x^2) + J(t)x \]
+and equation of motion for the classical path
+\[ \ddot{\bar{x}} + \omega^2 \bar{x} = \frac{J}{m}. \]
+
+This leaves the classical action \(S_\mathrm{cl}[\bar{x} + \eta](J) \), which helfully splits into independent terms like the unforced case, so it all works out rather nicely and we get
+\begin{equation*}
+  \braket{x_b, t_b}{x_a, t_a} = F_\omega(T)e^{\frac{i}{\hbar} S_\mathrm{cl}[\bar{x}](J)}
+\end{equation*}
+where we must calculate \(S_\mathrm{cl}\).
 
 \include{includes/appendices}
 \printbibliography
