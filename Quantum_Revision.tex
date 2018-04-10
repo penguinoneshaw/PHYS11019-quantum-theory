@@ -211,7 +211,31 @@ Ideally, it should make the entire thing converge, but we now need to find what 
 \section{Where's a potential when you need one?}
 We take a discrete time approximation for the Lagrangian of a free particle, that is to say
 \[ L = T = \frac{1}{2} m \dot{x}^2 \approx \frac{1}{2} m \qty(\frac{x_1 - x_0}{\varepsilon})^2.\]
-Turning this into a transition amplitude 
+Turning this into a transition amplitude gives us (remembering that we've discretized time again)
+\begin{align*}
+ \braket{x_b, t_b}{x_a, t_a} &= \lim_{N\to \infty} A_N \prod_{n=1}^N \int_{-\infty}^{\infty} \dd{x_{n}} \exp[\frac{i\varepsilon}{\hbar} \frac{m}{2} \sum_{n=1}^{N+1}\qty(\frac{x_n - x_{n-1}}{\varepsilon})^2] \intertext{which, using results from \autoref{sec:nested-gaussians}, gives us}
+ \braket{x_b, t_b}{x_a, t_a} &= \lim_{N\to \infty} A_N \qty(\frac{2 \varepsilon \hbar}{m})^{\nicefrac{N}{2}} \prod_{n=1}^N \int_{-\infty}^{\infty} \dd{x^\prime_{n}} \exp[i \sum_{n=1}^{N+1}\qty(\frac{x^\prime_n - x^\prime_{n-1}}{\varepsilon})^2]\\
+ &= \lim_{N\to \infty} A_N \qty(\frac{2\pi i \varepsilon \hbar}{m})^{\nicefrac{N}{2}} \frac{1}{\sqrt{N+1}}\exp[\frac{i\qty(x^\prime_b - x^\prime_{a})^2}{\varepsilon(N+1)}]\\
+ &= \lim_{N\to\infty}  A_N \qty(\frac{2\pi i \varepsilon \hbar}{m})^{\nicefrac{N+1}{2}} \sqrt{\frac{m}{2\pi i \hbar (N+1)\varepsilon}}\exp[\frac{im}{2\hbar}\frac{\qty(x_b - x_{a})^2}{\varepsilon(N+1)}].
+\end{align*}
+Now we must remember what we were trying to do --- find the normalisation \(\nu(\varepsilon)\) for the period \(T = t_b - t_a = (N+1)\varepsilon \).
+To do this, we impose the requirement that
+\[ A_N \qty(\frac{2\pi i \varepsilon \hbar}{m})^{\nicefrac{N+1}{2}} = 1\]
+ which is equivalent to
+ \[\nu(\varepsilon) = \sqrt{\frac{2\pi i \varepsilon \hbar}{m}},\]
+  allowing us to simplify the above result into
+\begin{equation}\label{eqn:free-particle}
+  \braket{x_b, t_b}{x_a, t_a} = \sqrt{\frac{m}{2\pi i \hbar T}}\exp[i\frac{m}{2\hbar}\frac{\qty(x_b - x_{a})^2}{T}].
+\end{equation}
+
+Now, it can be worked out easily that for a free particle,
+\[ S_{cl} = \frac{m}{2} \frac{(x_b - x_a)^2}{T}\] which is suspiciously similar to \autoref{eqn:free-particle}, so we make an identification that
+\begin{alignat*}{3}
+  \braket{x_b, t_b}{x_a, t_a} &= F_0(T)e^{i\nicefrac{S_{cl}}{\hbar}} & \qq{where} && F_0(T) &= \sqrt{\frac{m}{2\pi i \hbar T}}
+\end{alignat*}
+which is a \emph{very} helpful notation, since the prefactor is now independent of the endpoints.
+
+You may notice that \( \nu(\varepsilon) \) diverges for infinitessimal \(\varepsilon \), which is a little inconvenient, but we basically ignore it, as that choice of \(\nu\) is only the first order term.
 
 
 \appendix
