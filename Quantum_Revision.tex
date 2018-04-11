@@ -179,7 +179,7 @@ The Lagrangian definition of the action is \[ S[x(t)] = \int_{t_a}^{t_b} L(x, \d
 where \(L = T-V \) is the classical Lagrangian (of a point particle in some generalised co-ordinate) and \(S[x(t)]\) is a functional of the position. We also have canonical momenta \[ p = \pdv{L}{\dot{x}} \] which coincide with regular momenta in most cases, rather like the energy function.
 
 We define the functional derivative
-\[ \eval{\frac{\delta S}{\delta x}}_{x = \bar x} = 0 \] which is a statement of Hamilton's principle, defining the classical trajectory where the endpoints are fixed. What it actually \emph{means} is that we vary the action along a path by an infinitessimal using \[ \delta S = S[x + \delta x] - S[x] \] and Taylor expand. This leads to the Euler-Lagrange equation for the classical trajectory, \[ \dv{t}(\pdv{L}{\dot x}) - \pdv{L}{x} = 0 \] which defines the classical trajectory \(\bar{x} \) on which the \emph{classical action}
+\[ \eval{\frac{\delta S}{\delta x}}_{x = \bar x} = 0 \] which is a statement of Hamilton's principle, defining the classical trajectory where the endpoints are fixed. What it actually \emph{means} is that we vary the action along a path by an infinitesimal using \[ \delta S = S[x + \delta x] - S[x] \] and Taylor expand. This leads to the Euler-Lagrange equation for the classical trajectory, \[ \dv{t}(\pdv{L}{\dot x}) - \pdv{L}{x} = 0 \] which defines the classical trajectory \(\bar{x} \) on which the \emph{classical action}
 \(S_{\mathrm{cl}} = S[\bar x(t)]\) is defined. This will come back later.
 
 \section{Here Come The Irish With Their Principle Functions}
@@ -236,10 +236,10 @@ Now, it can be worked out easily that for a free particle,
 \end{alignat*}
 which is a \emph{very} helpful notation, since the prefactor is now independent of the endpoints.
 
-You may notice that \( \nu(\varepsilon) \) diverges for infinitessimal \(\varepsilon \), which is a little inconvenient, but we basically ignore it, as that choice of \(\nu\) is only the first order term.
+You may notice that \( \nu(\varepsilon) \) diverges for infinitesimal \(\varepsilon \), which is a little inconvenient, but we basically ignore it, as that choice of \(\nu\) is only the first order term.
 
 \section{Oscillation of its own accord}
-For a harmonic oscillator, the ``discretize time'' method becomes awkward to do, however, there's another thing we can try.
+For a harmonic oscillator, the ``discretize time'' method becomes awkward to do; however, there's another thing we can try.
 Firstly, the Lagrangian for the harmonic oscillator is
 \[ L = \frac{1}{2} m \dot{x}^2 - \frac{1}{2}m \omega x^2\] from which we can calculate the classical action,
 \[ S_{\mathrm{cl}} = \frac{m\omega}{2\sin(\omega T)} [(x_a^2 + x_b^2)\cos(\omega T) - 2x_a x_b]\]
@@ -261,7 +261,7 @@ This gives us our transition amplitude
   &= e^{\nicefrac{i}{\hbar} S_{\mathrm{cl}}} \int_{0}^{0} e^{\nicefrac{i}{\hbar} S[\eta]} \DD{\eta}\\
   &\equiv F_\omega(T)e^{\nicefrac{i}{\hbar} S_{\mathrm{cl}}}
 \end{align*}
-which various people solve in various ways, such as in \cite{feynman2010quantum}. Apparently the easiest is to do it by inspection, where we notice that since \( F_\omega (T) \) has no position dependence, we can also write it as
+which people solve in various ways, such as in \cite{feynman2010quantum}. Apparently the easiest is to do it by inspection, where we notice that since \( F_\omega (T) \) has no position dependence, we can also write it as
 \begin{align*}
   F_\omega(T) &= \braket{0, T}{0, 0}\\
               &= \int_\mathbb{R} \bra{0,T}\ket{x,t}\bra{x,t}\ket{0,0} \dd{x}\\
@@ -288,9 +288,25 @@ This leaves the classical action \(S_\mathrm{cl}[\bar{x} + \eta](J) \), which he
 \end{equation*}
 where we must calculate \(S_\mathrm{cl}\).
 
-\section{Phase Space Integral}
+\section{Shiftying Everything in Time on Our Terms}
 We look at a generic Lagrangian, \[ L= \frac{1}{2} m \dot{x}^2 - V(x, t) \] which we can Legendre transform into the Hamiltonian formalism and do the path integral to get
 \[ \braket{x_b, t_b}{x_a, t_a} = \int \DD{x} \int \DD{p} \exp[\frac{i}{\hbar} \int_{t_a}^{t_b} \dd{t} (p\dot{x} - H(x, p, t))] \]
+which comes from the infinitesimal amplitude
+\begin{align*}
+  \braket{x_{n+1}, t_{n+1}}{x_n, t_n} &= \sqrt{\frac{m}{2\pi i \varepsilon\hbar}} \exp[\frac{i\varepsilon}{\hbar}\qty{\frac{m}{2}\qty(\frac{x_{n+1} - x_n}{\varepsilon})^2 - V(x_n, t_n)}] \\
+  &= \int_{-\infty}^\infty \frac{1}{2\pi\hbar}\exp[\frac{ip_n}{\hbar}(x_{n+1} - x_n) - \frac{i\varepsilon}{2m\hbar}p_n^2 - \frac{i\varepsilon}{\hbar}V(x_n, t_n)]\dd{p}\\
+  &= \int_{-\infty}^\infty \mel{x_{n+1}}{\exp[-\frac{i\varepsilon}{2m\hbar}p_n^2]}{p_n} \mel{p_n}{\exp[ -\frac{i\varepsilon}{\hbar}V(x_n, t_n)]}{x_{n}}\dd{p}\\
+  &=\mel{x_{n+1}}{\exp[-\frac{i\varepsilon}{2m\hbar}\hat{p}_n^2]\exp[ -\frac{i\varepsilon}{\hbar}V(\hat{x}_n, t_n)]}{x_{n}}
+\end{align*}
+which has successfully been moved into an operators form, and looks rather suggestive.
+We can use the Baker-Campbell-Hausdorff formula \[ e^{\hat{A}}e^{\hat{B}} = e^{\hat{A} + \hat{B} + \frac{1}{2}\commutator{\hat{A}}{\hat{B}}} + \cdots \]
+to first order to turn this into the infinitesimal time-dependent Schr\"odinger equation \[\braket{x_{n+1}, t_{n+1}}{x_{n}, t_{n}} = \mel{x_{n+1}}{e^{-\frac{i\varepsilon}{\hbar{}} \hat{H}(t_n)}}{x_{n}}.\]
+This \emph{defines} the time evolution operator for finite time for a time independent Hamiltonian,
+\[ \ket{x, t} = \hat{U}(t, t_0)\ket{x} = e^{-\frac{i}{\hbar{}} (t - t_0) \hat{H}(t)}\ket{x}.\]
+
+For time dependent Hamiltonians, we have (by the chain rule) that
+\[ i\hbar \pdv{t}\hat{H}(t, t_0) = \hat{H}(t)\hat{U}(t, t_0). \]
+\(\hat{U}\) is fundamentally changes in basis.
 
 \include{includes/appendices}
 \printbibliography
