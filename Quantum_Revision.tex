@@ -308,13 +308,42 @@ which comes from the infinitesimal amplitude
 \end{align*}
 which has successfully been moved into an operators form, and looks rather suggestive.
 We can use the Baker-Campbell-Hausdorff formula \[ e^{\hat{A}}e^{\hat{B}} = e^{\hat{A} + \hat{B} + \frac{1}{2}\commutator{\hat{A}}{\hat{B}}} + \cdots \]
-to first order to turn this into the infinitesimal time-dependent Schr\"odinger equation \[\braket{x_{n+1}, t_{n+1}}{x_{n}, t_{n}} = \mel{x_{n+1}}{e^{-\frac{i\varepsilon}{\hbar{}} \hat{H}(t_n)}}{x_{n}}.\]
+to first order to turn this into the infinitesimal time evolution operator \[\braket{x_{n+1}, t_{n+1}}{x_{n}, t_{n}} = \mel{x_{n+1}}{e^{-\frac{i\varepsilon}{\hbar{}} \hat{H}(t_n)}}{x_{n}}.\]
 This \emph{defines} the time evolution operator for finite time for a time independent Hamiltonian,
 \[ \ket{x, t} = \hat{U}(t, t_0)\ket{x} = e^{-\frac{i}{\hbar{}} (t - t_0) \hat{H}(t)}\ket{x}.\]
 
 For time dependent Hamiltonians, we have (by the chain rule) that
 \[ i\hbar \pdv{t}\hat{H}(t, t_0) = \hat{H}(t)\hat{U}(t, t_0). \]
 \(\hat{U}\) is fundamentally changes in basis.
+
+\chapter{Herren Schr\"odinger und Heisenberg kommen}
+\section{All of the Pretty Pictures}
+Using the time evolution operator, we can find derive the time-dependent Schr\"odinger equation, \[ i\hbar\pdv{t}\psi(x, t) = \hat{H}\psi(x, t) .\]
+
+By defining a time dependent state vector \[ \ket{\psi, t} = \hat{U}(t, t_0) \ket{\psi} \] we introduce the Schr\"odinger picture of quantum mechanics where the bases are fixed and the states change, in opposition to the Heisenberg picture of fixed states and changing bases.
+The choice of picture is a choice of where we put the time dependence, and does not change the physics of the problem.
+
+In the Schr\"odinger picture, operators are time independent, so all evolution is done in-state. Contrastingly, in the Heisenberg picture, the operators are time \emph{dependent}, and are given by \[ \hat{x}(t) = \hat{U}^\dagger(t, t_0)\, \hat{x}\, \hat{U}(t, t_0) \] which is clearly the same if applied to a state. This time dependence gives the Heisenberg equation of motion almost immediately, which is
+\begin{align*}
+  i\hbar \pdv{t}\hat{O}(t) &= \commutator{\hat{O}(t)}{\hat{H}(t)}.
+\end{align*}
+
+We say that an operator is conserved if \(\pdv{\hat{O}}{t} = \commutator{\hat{O}(t)}{\hat{H}(t)} = 0 \).
+
+\section{A British Miller (who happened to be really good at Maths) Cometh}
+Moments of recognition might've triggered at some point that \( \braket{x_a, t_a}{x_b, t_b} \) is actually a Green's function of the Sch\"odinger equation, i.e.~
+\begin{align*}
+  (\hat{H} - i\hbar\pdv{t}))\braket{x, t}{x^\prime, t^\prime} &= -i\hbar \delta(t- t^\prime) \delta(x - x^\prime)
+\end{align*}
+although this isn't quite true, as the time parameter isn't fixed automatically.
+Specifically, this is the retarded Green's function, where we must impose causality, giving us
+\begin{equation*}
+  G(x-x^\prime, t - t^\prime) =
+  \begin{cases}
+    \braket{x, t}{x^\prime, t^\prime} & t > t^\prime \\
+    0 & t < t^\prime
+  \end{cases}
+\end{equation*}
 
 \include{includes/appendices}
 \printbibliography
