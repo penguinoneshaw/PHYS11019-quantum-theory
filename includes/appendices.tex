@@ -47,8 +47,8 @@ which with another translation gives us the really nice answer that \[ I = e^{i\
 The $N$-th nested Gaussian, \( I_N \), is the logical extension of this, and telescopes rather nicely.
 We set
 \begin{align*}
-  I_N &= \idotsint \dd{x_1} \cdots \dd{x_N} \exp(i \qty[ (x_1 - x_0 )^2 + (x_2 - x_1)^2 + \ldots + (x_{N+1} - x_{N})^2])\\
-      &= \sqrt{\frac{i\pi}{2}}\idotsint \dd{x_2} \cdots \dd{x_N} \exp(i \qty[ \nicefrac{1}{2}(x_2 - x_0 )^2 + (x_2 - x_1)^2 + \ldots + (x_{N+1} - x_{N})^2])\\
-      &= \sqrt{\frac{i\pi}{N+1}}\exp(i \nicefrac{(x_{N+1} - x_0)^2}{N+1})
+  I_N &= \idotsint \dd{x_1} \cdots \dd{x_N} e^{i \qty[ (x_1 - x_0 )^2 + (x_2 - x_1)^2 + \ldots + (x_{N+1} - x_{N})^2]}\\
+      &= \sqrt{\frac{i\pi}{2}}\idotsint \dd{x_2} \cdots \dd{x_N} \exp[i \qty[ \nicefrac{1}{2}(x_2 - x_0 )^2 + (x_2 - x_1)^2 + \ldots + (x_{N+1} - x_{N})^2]]\\
+      &= \sqrt{\frac{i\pi}{N+1}}\exp[i \nicefrac{(x_{N+1} - x_0)^2}{N+1}]
 \end{align*}
 which is a nice enough statement.
