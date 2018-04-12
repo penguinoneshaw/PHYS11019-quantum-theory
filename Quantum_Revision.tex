@@ -1,86 +1,11 @@
-\documentclass[]{scrreprt}
+\documentclass[]{revision-notes}
 
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-
-\usepackage[UKenglish]{babel}
-\usepackage[UKenglish]{isodate}
-\usepackage{csquotes}
-
-\usepackage{graphicx}
-\usepackage[arrowdel]{physics}
-\usepackage[hidelinks, pdfusetitle]{hyperref}
-\usepackage{nicefrac}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsfonts}
-\usepackage{relsize}
-\usepackage{booktabs}
-\usepackage{bbm}
-\usepackage{cancel}
-\usepackage[sorting=none,bibencoding=utf8,giveninits,uniquename=init]{biblatex}
 \addbibresource{QT.bib}
 
-\KOMAoption{chapterprefix}{true}
-
-\KOMAoptions{
-paper=a4,
-fontsize=11pt,
-parskip=half-,
-BCOR=.5cm,
-pagesize=auto,
-pagesize=pdftex,
-headinclude=false,
-footinclude=false,
-DIV=12
-}
-
-\renewcommand*\raggedchapter{\centering}
-\RedeclareSectionCommand[beforeskip=0pt,afterskip=1\baselineskip]{chapter}
-\setkomafont{chapterprefix}{\normalsize\mdseries}
-
-\renewcommand*{\chapterformat}{%
-  \chapappifchapterprefix{\nobreakspace}\thechapter\autodot%
-  \IfUsePrefixLine{%
-    \par\nobreak\vspace{-\parskip}\vspace{-.6\baselineskip}%
-    \rule{0.9\textwidth}{.2pt}%
-  }{}%
-}
-
-\usepackage{mathtools}
-\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
-\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
-\usepackage{mathrsfs}
-\newcommand{\fourier}[1]{\ensuremath{\mathlarger{\mathcal{F}}\!\!\left[#1 \right]}}
-\newcommand{\inversefourier}[1]{\ensuremath{\mathlarger{\mathcal{F}^{-1}}\!\!\left[#1 \right]}}
-\newcommand{\laplace}[1]{\ensuremath{\mathlarger{L}\!\!\left[#1 \right]}}
-\DeclareMathOperator{\erfc}{erfc}
-
-\setkomafont{disposition}{\rmfamily\scshape\bfseries}
-
-
-\usepackage[largesc]{newpxtext}
-\usepackage{newpxmath}
-\setkomafont{descriptionlabel}{\rmfamily\bfseries}
-\linespread{1.05}
-
-\usepackage[tikz]{mdframed}
-\newmdenv[frametitle=Example,roundcorner=5pt]{example}
-\newmdenv[frametitle=Note,roundcorner=5pt]{note}
-\renewcommand\hbar\hslash
-\newcommand{\DD}[1]{\ensuremath{\mathcal{D} #1\,}}
-
-\title{Quantum Theory}
+\title{PHYS11019: Quantum Theory}
 \subtitle{Integrals. SO MANY INTEGRALS.}
 \author{James Shaw}
 \date{Spring 2017}
-\renewcommand{\leq}{\leqslant}
-\renewcommand{\geq}{\geqslant}
-\renewcommand{\vec}{\underline}
-\setcounter{tocdepth}{2}
-
-%\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,shrink=10]{microtype}
-\usepackage[activate={true,nocompatibility},kerning=true,spacing=true,final]{microtype}
 
 \begin{document}
 \input{titlepage}
@@ -162,7 +87,7 @@ which gives us the final results
 \subsection{Canonical Commutation Relation}
 The fundamental result of quantum mechanics is given by the canonical commutation relation, \[ \commutator{\hat{x}}{\hat{k}} = i \] which more practically is used as \[\commutator{\hat{x}}{\hat{p}} = i\hbar. \]
 
-\section{Time is a Continuum. Lunchtime doubly so}
+\section{Time is a Continuum. Lunchtime, doubly so}
 We now increase the number of gratings, and take it to its continuum limit.
 Firstly, we define a system with \(N\) gratings arranged one after another.
 This gives us states \( \ket{x_i, t_i} \) where the \(i\) labels the grating, so \(t_i\) is the time the \(i\)-th grating is passed.
@@ -434,13 +359,32 @@ Using this identity, we can get rid of the factorials and find that
 Some rewriting can occur, it all makes a meal out of getting to a statement which feels sort of intuitive, \begin{equation*}
   \braket{x_b, t_b}{x_a, t_a} = \braket{x_b, t_b}{x_a, t_a}_0  - \frac{i}{\hbar} \int_{-\infty}^\infty \dd{x} \int_{t_a}^{t_b} \dd{t} \braket{x_b, t_b}{x, t}_0 V(x, t) \braket{x, t}{x_a, t_a}.
 \end{equation*}
-This looks a little funky, but it's fine really, just look at it as a weird application of the Green's function at different times.
+This looks a little funky, but it's fine really; look at it as a weird application of the Green's function at different times.
 
 We can apply this for a general wavefunction as
 \begin{align*}
   \braket{x, t}{\psi} &= \braket{x, t}{\psi}_0 - \frac{i}{\hbar}\int_{-\infty}^\infty \dd{x^\prime} \int_{t_0}^t \dd{t} \braket{x, t}{x^\prime, t^\prime}_0 V(x^\prime, t^\prime) \braket{x^\prime, t^\prime}{\psi}
 \end{align*}
 which really emphasises the Green's function nature.
+
+\section{Shooting Things At A Target Which Doesn't Move}
+We invent a scattering operator, the \(S\) matrix, defined by
+\begin{align*}
+  \lim_{t_b \to \infty} \lim_{t_a \to -\infty} \braket{\vec{r}_b, t_b}{\vec{r}_a, t_a} &=   \lim_{t_b \to \infty} \lim_{t_a \to -\infty} \mel{\vec{r}_b}{\hat{U}(t_b, t_a)}{\vec{r}_a}\\
+  &\equiv \mel{\vec{r}_b}{\hat{S}}{\vec{r}_a}\\
+  &= \lim_{T \to \infty} \braket{\vec{r}_b, T}{\vec{r}_a, 0}
+\end{align*}
+which means we define in and out states at infinite time, but have the choice to start our internal clock whenever.
+
+In the region outside the potential, we assume that the incident particle is a free particle with Lagrangian \[L_0 (\vec{r}) = \frac{m}{2} \qty(\dot{x}_1^2 + \dot{x}_2^2 + \dot{x}_3^2).\]
+
+We then calculate to increasing orders in perturbation theory, the first order of which is
+\begin{align*}
+  A_1 &= - \frac{i}{\hbar} \int_{-\infty}^\infty \dd[3]{r} \int_{0}^{T} \dd{t} \braket{\vec{r}_b, t_b}{\vec{r}, t}_0 V(x, t) \braket{\vec{r}, t}{\vec{r}_a, t_a}\\
+      &= - \frac{i}{\hbar} \int_{-\infty}^{\infty} \dd[3]{r} \int^T_0 \dd{t} \qty(\frac{m}{2\pi i \hbar (T-t)})^{\nicefrac{3}{2}}\exp{\frac{im\abs{\vec{r}_b - \vec{r}}^2}{2\hbar (T - t)}} V(\vec{r})\\
+      &\mspace{300mu}\times\qty(\frac{m}{2\pi i \hbar t})^{\nicefrac{3}{2}}\exp{\frac{im\abs{\vec{r} - \vec{r}_a}^2}{2\hbar (T - t)}}.
+\end{align*}
+Solving that integral is a little tricky.
 
 
 \include{includes/appendices}
