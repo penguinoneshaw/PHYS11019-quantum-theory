@@ -332,7 +332,7 @@ We say that an operator is conserved if \(\pdv{\hat{O}}{t} = \commutator{\hat{O}
 \section{A British Miller (who happened to be really good at Maths) Cometh}
 Moments of recognition might've triggered at some point that \( \braket{x_a, t_a}{x_b, t_b} \) is actually a Green's function of the Sch\"odinger equation, i.e.~
 \begin{align*}
-  (\hat{H} - i\hbar\pdv{t}))\braket{x, t}{x^\prime, t^\prime} &= -i\hbar \delta(t- t^\prime) \delta(x - x^\prime)
+  (\hat{H} - i\hbar\pdv{t}) \braket{x, t}{x^\prime, t^\prime} &= -i\hbar \delta(t- t^\prime) \delta(x - x^\prime)
 \end{align*}
 although this isn't quite true, as the time parameter isn't fixed automatically.
 Specifically, this is the retarded Green's function, where we must impose causality, giving us
@@ -390,6 +390,57 @@ By considering the spatial derivatives of the transition elements, we derive Ehr
   \ev{\ddot{x}}_S = - \frac{1}{m} \ev{\pdv{V}{x}}_S
 \end{equation*}
 which looks a lot like Newton's 2nd law, and handily works like it too.
+
+\chapter{Making It All A Bit Less Accurate}
+\section{Perturbation Theory from Path Integrals}
+Finding exact solutions is tricky (or impossible), and usually not worth it.
+However, we can usually use perturbation theory by splitting the action into a solvable part and a perturbation, such as
+\begin{align*}
+  S[x(t)] &= S_0[x(t)] + S_1[x(t)]
+\end{align*}
+and then we can then consider (for slowly varying potentials), we can write
+\begin{alignat*}{3}
+  S_0[x(t)] &= \int_{t_a}^{t_b} \frac{1}{2}m\dot{x}^2 \dd{t} & \qq{and} &&  S_1[x(t)] &= -\int_{t_a}^{t_b} V(x(t), t) \dd{t}\intertext{or}
+  S_0[x(t)] &= \int_{t_a}^{t_b} \frac{1}{2}m\dot{x}^2 - U(x) \dd{t} & \qq{and} &&  S_1[x(t)] &= -\int_{t_a}^{t_b} \tilde{V}(x(t), t) \dd{t}
+\end{alignat*}
+where we split \(V(x,t) = U(x) + \tilde{V}(x,t)\) where \(U\) is a solvable, time independent potential, often that of the Harmonic oscillator.
+
+Substituting this separation into the transition amplitude gives
+\begin{align*}
+  \braket{x_b, t_b}{x_a, t_a} &= \int_{x_a}^{x_b} \exp[\frac{i}{\hbar}(S_0[x(t)] + S_1[x(t)])] \DD{x}\\
+  &=  \int_{x_a}^{x_b} e^{\frac{i}{\hbar}S_0[x(t)]}\sum_{n=0}^\infty \frac{1}{n!}\qty(\frac{i}{\hbar}S_1[x(t)])^2 \DD{x}\\
+  &= \braket{x_b, t_b}{x_a, t_a}_0 + \sum_{n=1}^\infty  \frac{1}{n!}\qty(\frac{i}{\hbar})^2 \prod_{k=1}^{n} \int_{t_a}^{t_b} \dd{t_n} \int_{x_a}^{x_b} \DD{x} \prod_{m=1}^{n}V(x(t_m), t_m) e^{\frac{i}{\hbar} S_0[x(t)] }
+\end{align*}
+where the last one uses the time ordered product.
+Interpreting the last of those units is interesting, as
+\begin{align*}
+  \int_{x_a}^{x_b} \DD{x} \prod_{m=1}^{n}V(x(t_m), t_m) e^{\frac{i}{\hbar} S_0[x(t)] } = \int \dd{x_1} \cdots \int \dd{x_n} &\braket{x_b, t_b}{x_{n}, t_{n}}_0 V(x_n, t_n)  \\
+  &\times \braket{x_{n}, t_{n}}{x_{n-1}, t_{n-1}}_0 \\
+  & \times \cdots \times V(x_1, t_1) \braket{x_{2}, t_{2}}{x_{1}, t_{1}}_0
+\end{align*}
+which means that the perturbation can be thought of as the sum of situations where the particle is scattered through interaction with the potential an increasing number of times with each unit.
+
+The \(x\) and \(t\) integrals are needed to sum over all paths (as is the basic conceit of the path integral) and the \( \frac{1}{n!}\) unit ensures that we don't overcount for each of the time ordered units.
+There's an identity\footnote{which I genuinely don't see the use of} which is that
+\begin{equation*}
+  \frac{1}{n!}\int_{t_a}^{t_b} \dd{t_n} \cdots \int_{t_a}^{t_b} \dd{t_1} V(t_1) \cdots V(t_n) = \int_{t_a}^{t_b} \dd{t_n} \int_{t_a}^{t_n} \dd{t_{n-1}} \cdots \int_{t_a}^{t_2} \dd{t_1} V(t_1) \cdots V(t_n)
+\end{equation*}
+for\ldots reasons\ldots
+Using this identity, we can get rid of the factorials and find that
+\begin{align*}
+    \braket{x_b, t_b}{x_a, t_a} &= \braket{x_b, t_b}{x_a, t_a}_0 + \sum_{n=1}^\infty \qty(\frac{i}{\hbar})^2 \prod_{k=1}^{n} \int_{t_a}^{t_{n+1}} \dd{t_n} \int_{x_a}^{x_b} \DD{x} \prod_{m=1}^{n}V(x(t_m), t_m) e^{\frac{i}{\hbar} S_0[x(t)] }.
+\end{align*}
+
+Some rewriting can occur, it all makes a meal out of getting to a statement which feels sort of intuitive, \begin{equation*}
+  \braket{x_b, t_b}{x_a, t_a} = \braket{x_b, t_b}{x_a, t_a}_0  - \frac{i}{\hbar} \int_{-\infty}^\infty \dd{x} \int_{t_a}^{t_b} \dd{t} \braket{x_b, t_b}{x, t}_0 V(x, t) \braket{x, t}{x_a, t_a}.
+\end{equation*}
+This looks a little funky, but it's fine really, just look at it as a weird application of the Green's function at different times.
+
+We can apply this for a general wavefunction as
+\begin{align*}
+  \braket{x, t}{\psi} &= \braket{x, t}{\psi}_0 - \frac{i}{\hbar}\int_{-\infty}^\infty \dd{x^\prime} \int_{t_0}^t \dd{t} \braket{x, t}{x^\prime, t^\prime}_0 V(x^\prime, t^\prime) \braket{x^\prime, t^\prime}{\psi}
+\end{align*}
+which really emphasises the Green's function nature.
 
 
 \include{includes/appendices}
