@@ -1,0 +1,19 @@
+sudo: required
+dist: trusty
+before_install:
+- sudo apt-get -qq update && sudo apt-get install -y --no-install-recommends texlive-fonts-recommended texlive-latex-extra texlive-fonts-extra dvipng texlive-latex-recommended
+script:
+- mkdir _build
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build tex/Quantum_Revision.tex
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build tex/Quantum_Revision.tex
+- biber Quantum_Revision
+- pdflatex -interaction=nonstopmode -halt-on-error -output-directory _build tex/Quantum_Revision.tex
+deploy:
+  provider: releases
+  api_key:
+    secure: FTQCNy67TVzE4A9CIOKVWg
+  file:
+  - _build/Quantum_Revision.pdf
+  skip_cleanup: true
+  on:
+    tags: true
