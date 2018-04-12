@@ -18,7 +18,7 @@
 \usepackage{booktabs}
 \usepackage{bbm}
 \usepackage{cancel}
-\usepackage[sorting=none,bibencoding=utf8,style=authoryear,giveninits,uniquename=init]{biblatex}
+\usepackage[sorting=none,bibencoding=utf8,giveninits,uniquename=init]{biblatex}
 \addbibresource{QT.bib}
 
 \KOMAoption{chapterprefix}{true}
@@ -316,8 +316,7 @@ For time dependent Hamiltonians, we have (by the chain rule) that
 \[ i\hbar \pdv{t}\hat{H}(t, t_0) = \hat{H}(t)\hat{U}(t, t_0). \]
 \(\hat{U}\) is fundamentally changes in basis.
 
-\chapter{Herren Schr\"odinger und Heisenberg kommen}
-\section{All of the Pretty Pictures}
+\section{Herren Schr\"odinger und Heisenberg kommen}
 Using the time evolution operator, we can find derive the time-dependent Schr\"odinger equation, \[ i\hbar\pdv{t}\psi(x, t) = \hat{H}\psi(x, t) .\]
 
 By defining a time dependent state vector \[ \ket{\psi, t} = \hat{U}(t, t_0) \ket{\psi} \] we introduce the Schr\"odinger picture of quantum mechanics where the bases are fixed and the states change, in opposition to the Heisenberg picture of fixed states and changing bases.
@@ -344,6 +343,54 @@ Specifically, this is the retarded Green's function, where we must impose causal
     0 & t < t^\prime
   \end{cases}
 \end{equation*}
+which is kind of useful, since we can now use Green's function methods for finding states.
+
+\section{Energy Eigenbasis}
+We can use the eigenstates of the Hamiltonian as a pretty nifty basis, since the discretized energy levels means that everything is nicely sums. Specifically, if
+\begin{align*}
+  \hat{H}\ket{n} &= E_n\ket{n}\\
+  u_n(x) &= \braket{x}{n}
+\end{align*}
+the practical upshot is that for \(t > 0 \), the colourful function is
+\begin{align*}
+  G(x-y, t) \equiv \braket{x, t}{y, 0} &= \mel{x}{e^{-\nicefrac{i}{\hbar}\,t \hat{H}}}{y}\\
+  &= \sum_n e^{-\nicefrac{i}{\hbar}\,t E_n} u_n(x)\,u_n^\ast(y).
+\end{align*}
+
+The trace of the energy eigenbasis gives us \[ \int_{-\infty}^{\infty} \braket{x,t}{x,0} \dd{x} = \sum_n e^{-\nicefrac{itE_n}{\hbar}} \] which is really somewhat useful.\footnote{In the notes, at this point, there follows a good few examples which I simply cannot be bothered to type out, more's the pity. They don't actually seem to be that illuminating, though the Aharonov-Bohm effect is an interesting thing --- a magnetic field which by rights shouldn't effect the path of the particle does because integration.}
+
+\section{Transition Elements}
+The transition amplitude discovered several times now leads us to ask ``what is the weighted average of the paths on an operator?''.
+We discover that it is
+\begin{align*}
+  \ev{x(t)}_S &\equiv \int_{x_a}^{x_b} x(t) \, e^{\frac{i}{\hbar} S[x]} \DD{x}\\
+  &= \int_{-\infty}^\infty x \int_x^{x_b} \exp[\frac{i}{\hbar} \int_t^{t_b} L \dd{t^{\prime\prime}}]\DD{x^{\prime\prime}} \int^x_{x_a}\exp[\frac{i}{\hbar} \int^t_{t_a} L \dd{t^{\prime}}]\DD{x^{\prime}}\dd{x}\\
+  &= \mel{x_b, t_b}{\hat{x}(t)}{x_a, t_b}
+\end{align*}
+which connects the path integrals to the traditional operator version.
+
+Similarly, \[ \ev{f(x(t))}_S \equiv \int_{x_a}^{x_b} f(x(t))\, e^{\frac{i}{\hbar} S[x]} \DD{x} = \mel{x_b, t_b}{f(\hat{x}(t))}{x_a, t_b}\]
+which is going to come in handy.
+
+\section{Time Ordered Products}
+It's worth noting, as it hasn't been stated previously, that positions at different times do not commute in the Heisenberg (or any) picture, that is to say \( \commutator{\hat{x}(t)}{\hat{x}(t^\prime)} \neq 0 \) for \( t \neq t^\prime \).
+This motivates us to write
+\[ \ev{x(t) x(t^\prime)}_S = \mel{x_b, t_b}{T(\hat{x}(t), \hat{x}(t^\prime))}{x_a, t_b} \]
+where we define the \emph{time ordered product} as \[ T(\hat{x}(t), \hat{x}(t^\prime)) \equiv \theta(t - t^\prime)\hat{x}(t)\hat{x}(t^\prime) + \theta(t^\prime - t)\hat{x}(t^\prime)\hat{x}(t) \] which has the operators ordered from latest to earliest.
+
+We can apply this to more general states \( \ket{\phi} \& \ket{\psi} \), giving
+\begin{align*}
+  \mel{\psi}{T(\hat{x}(t_1)) \cdots T(\hat{x}(t_2))}{\phi} &= \int \dd{x_a} \int \dd{x_b} \psi^\ast (x_b, t_b) \phi(x_a, t_a)  \ev{x(t_1)\cdots x(t_n)}_S
+\end{align*}
+which are also known as correlation functions.
+
+\section{Another Austrian, Another Theorem, Classical Physics?}
+By considering the spatial derivatives of the transition elements, we derive Ehrenfest's theorem,
+\begin{equation*}
+  \ev{\ddot{x}}_S = - \frac{1}{m} \ev{\pdv{V}{x}}_S
+\end{equation*}
+which looks a lot like Newton's 2nd law, and handily works like it too.
+
 
 \include{includes/appendices}
 \printbibliography
