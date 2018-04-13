@@ -446,7 +446,33 @@ This gives us the statement that
   \implies\qquad \dv{\sigma}{\Omega} &= \qty(\frac{m}{2\pi\hbar^2})^2 \abs{\tilde{V}(\vec{k})}^2.
 \end{align*}
 
-If \(V(\vec{r}) \) only depends on r (i.e.~is a central potential), then the fourier tra
+If \(V(\vec{r}) \) only depends on r (i.e.~is a central potential), then
+\begin{align*}
+  \tilde{V}(\vec{k}) &= \int_{-\infty}^{\infty} V(r) \exp i \vec{k}\vdot\vec{r} \\
+  &= \frac{4\pi}{k}\int_0^\infty r\,V(r) \,\sin(kr)\dd{r}.
+\end{align*}
+In order to get this to converge, we will sometimes have to modify this to
+\begin{align*}
+  \tilde{V}(\vec{k}) &= \lim_{\mu \to 0} \int_0^\infty r\,V(r) \,\sin(kr) e^{-\mu r}\dd{r}
+\end{align*}
+where \( k = \frac{1}{\hbar} \abs{\vec{p}_a - \vec{p}_b} = \frac{2p}{\hbar}\sin(\nicefrac{\theta}{2}) \).
+
+\begin{example}
+  For any \(V(r) \propto -\frac{1}{r}\), we can use the forced-convergence trick to find that
+  \begin{align*}
+    \int_0^\infty r\,V(r)\,\sin(kr) \dd{r} &\propto -\frac{1}{k}
+  \end{align*}
+  and hence
+  \begin{align*}
+    \dv{\sigma}{\Omega} &\propto \frac{1}{16E^2}\frac{1}{\sin^4(\nicefrac{\theta}{2})}
+  \end{align*}
+  which, in the case of the Coulomb potential, happens to coincide with the Rutherford cross section.
+\end{example}
+
+\section{Shooting Beams at Each Other}
+
+
+\chapter{Lots of Little Things Moving Around Really Rather Quickly\ldots Maybe}
 
 \include{includes/appendices}
 \printbibliography
