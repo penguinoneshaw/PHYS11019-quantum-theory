@@ -209,7 +209,7 @@ This gives us
 which we can look at and notice that \( F_\omega (T) \) should probably be
 \[ F_\omega (T) \sqrt{\frac{m\omega}{2\pi i \hbar} \frac{1}{\sin \omega T}} \] if we want the two other terms to cancel out. There's no systematic way of doing this really, though taking the \( T \gg t \) limit should result in the same.
 
-\section{You Have No Choice, Just Oscillate}
+\section{Driven to Distraction}
 The forced harmonic oscillator has the Lagrangian
 \[ L = \frac{1}{2} m (\dot{x}^2 - \omega^2 x^2) + J(t)x \]
 and equation of motion for the classical path
@@ -374,7 +374,7 @@ We invent a scattering operator, the \(S\) matrix, defined by
   &\equiv \mel{\vec{r}_b}{\hat{S}}{\vec{r}_a}\\
   &= \lim_{T \to \infty} \braket{\vec{r}_b, T}{\vec{r}_a, 0}
 \end{align*}
-which means we define in and out states at infinite time, but have the choice to start our internal clock whenever.
+which means we define in (at \( r_a \)) and out (at \( r_b \)) states at infinite time, but have the choice to start our internal clock whenever.
 
 In the region outside the potential, we assume that the incident particle is a free particle with Lagrangian \[L_0 (\vec{r}) = \frac{m}{2} \qty(\dot{x}_1^2 + \dot{x}_2^2 + \dot{x}_3^2).\]
 
@@ -385,7 +385,68 @@ We then calculate to increasing orders in perturbation theory, the first order o
       &\mspace{300mu}\times\qty(\frac{m}{2\pi i \hbar t})^{\nicefrac{3}{2}}\exp{\frac{im\abs{\vec{r} - \vec{r}_a}^2}{2\hbar (T - t)}}.
 \end{align*}
 Solving that integral is a little tricky.
+It requires a pretty complicated statement which you can probably just look up.
+We set \( R_a = \abs{\vec{r}_a - \vec{r}} \) and \( R_b = \abs{\vec{r}_b - \vec{r}} \) and thus get
+\begin{equation*}
+A_1 = -\frac{i}{\hbar}\qty(\frac{m}{2\pi i\hbar{}})^{\nicefrac{5}{2}} \frac{1}{T^{\nicefrac{3}{2}}} \int^\infty_{-\infty} \qty(\frac{1}{R_a} + \frac{1}{R_b}) V(\vec{r}) \exp[\frac{im}{2\hbar T}(R_a + R_b)^2] \dd[3]{r}
+\end{equation*}
 
+We continue our quest to rewrite this ever less accurately by assuming that the potential is short range and thus expanding the statements
+\[ R_i = \abs{\vec{r}_i - \vec{r}} \approx r_i - \vec{n}_i \vdot \vec{r} \]
+which, with substitution and expansion, gives
+\begin{multline*}
+  A_1 = -\frac{i}{\hbar}\qty(\frac{m}{2\pi i\hbar{}})^{\nicefrac{5}{2}} \frac{1}{T^{\nicefrac{3}{2}}} \qty(\frac{1}{r_a} + \frac{1}{r_b}) \exp[\frac{im}{2\hbar T}(r_a + r_b)^2] \\
+  \times\int^\infty_{-\infty}  V(\vec{r}) \exp[\frac{im}{\hbar T}(r_a + r_b)(\vec{n}_a + \vec{n}_b)\vdot{\vec{r}}] \dd[3]{r}
+\end{multline*}
+
+\subsection{Transfers}
+By assuming that most of the time the particle is a free particle, we can assume its speed is \[ u = \frac{r_a + r_b}{T} \] which then makes
+\begin{align*}
+  p &= m\frac{r_a + r_b}{T} & E &= \frac{1}{2} m \qty(\frac{r_a + r_b}{T})^2
+\end{align*}
+and the vector momentum is thus \[ \vec{p}_i = -p \vec{n}_i \qq{for} i \in \{a, b\}. \]
+The momentum transfer (i.e.~the change in momentum due to the interactions) is
+\begin{align*}
+  \vec{p}_a - \vec{p}_b &= -m\frac{r_a + r_b}{T} (\vec{n}_a + \vec{n}_b)\\
+  &\equiv \hbar \vec{k}
+\end{align*}
+
+This gives us \emph{YET ANOTHER} rewriting,
+\begin{align*}
+  A_1 &= -\frac{i}{\hbar}\qty(\frac{m}{2\pi i\hbar{}})^{\nicefrac{5}{2}} \frac{1}{T^{\nicefrac{3}{2}}} \qty(\frac{r_a + r_b}{r_a r_b}) \exp[\frac{i}{\hbar}ET] \int^\infty_{-\infty}  V(\vec{r}) \exp[i\vec{k}\vdot{\vec{r}}] \dd[3]{r}
+\end{align*}
+and we define (for the sake of easier writing later)
+\begin{align*}
+  \tilde{V}(\vec{k}) &= \int^\infty_{-\infty}  V(\vec{r}) \exp[i\vec{k}\vdot{\vec{r}}] \dd[3]{r}
+\end{align*}
+which also emphasises that this is just the Fourier transform of the potential --- wave-particle duality is becoming a thing.
+
+\subsection{Transition Probability}
+The transition probability (from the starting position to a specific endpoint)
+\begin{equation*}
+  P(a \to b) = \abs{A_1}^2 = \frac{1}{\hbar^2} \qty(\frac{m}{2\pi\hbar})^5 \frac{1}{T^3} \qty(\frac{r_a + r_b}{r_a r_b})^2 \abs{\tilde{V}(\vec{k})}^2.
+\end{equation*}
+
+For a no-scatter situation --- where the particle doesn't interact with the potential --- we use the free particle transition amplitudes
+\begin{align*}
+  A_0 = \braket{\vec{r}_c, T}{\vec{r}_a, 0}_0 &= \qty(\frac{m}{2\pi i \hbar T})^{\nicefrac{3}{2}} \exp[i\frac{m}{2\hbar T}(\vec{r}_c - \vec{r}_a)^2]\\
+  \implies P(a \to c) = \abs{A_0}^2 &= \qty(\frac{m}{2\pi i \hbar T})^{3}.
+\end{align*}
+
+Putting these together to get the transition ratio gives
+\begin{align*}
+  \frac{P(a \to b)}{P(a \to c)} &= \qty(\frac{m}{2\pi\hbar^2})^2 \qty(\frac{r_a + r_b}{r_a r_b})^2 \abs{\tilde{V}(\vec{k})}^2.
+\end{align*}
+
+\subsection{Cross Section}
+The differential cross section (in the Born approximation) is the rate of scattering against an infinitesimal area \( \dd{\sigma}\) into an infinitesimal solid angle \( \dd{\Omega} \).
+This gives us the statement that
+\begin{align*}
+  \frac{P(a \to b)}{P(a \to c)} &= \qty(\frac{r_a + r_b}{r_a r_b})^2 \dv{\sigma}{\Omega}\\
+  \implies\qquad \dv{\sigma}{\Omega} &= \qty(\frac{m}{2\pi\hbar^2})^2 \abs{\tilde{V}(\vec{k})}^2.
+\end{align*}
+
+If \(V(\vec{r}) \) only depends on r (i.e.~is a central potential), then the fourier tra
 
 \include{includes/appendices}
 \printbibliography
