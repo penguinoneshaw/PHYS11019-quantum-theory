@@ -538,13 +538,13 @@ If the perturbation is time independent, we derive Fermi's golden rule for the t
 
 \chapter{Richard Feynman Sticks His Boot In}
 We go back to classical mechanics for a bit, in order to motivate the point of the exercise.
-A forced \emph{an}harmonic oscillator has an action \(S = S_0[x]_J\footnote{I'm not certain about this notation, but I know for sure and certain I don't like the one in the notes. It's alsoc significantly different to the one I used earlier.} + S_1[x]\) with Lagrangian \[L = L_{\text{Driven SHO}} - \frac{\lambda}{4}x^4 \] and
+A forced \emph{an}harmonic oscillator has an action \(S = S_0[x]_J\footnote{I'm not certain about this notation, but I know for sure and certain I don't like the one in the notes. It's also significantly different to the one I used earlier.} + S_1[x]\) with Lagrangian \[L = L_{\text{Driven SHO}} - \frac{\lambda}{4}x^4 \] and
 \[ \qty(\pdv[2]{t} + \omega^2)x = \frac{J}{x} - \frac{\lambda}{m}x^3.\]
 
 
 \section{GREEEEEEEN *waves fist*}
 We have the homogeneous equation \[ \qty(\pdv[2]{t} + \omega^2) \bar{x}_0 = 0 \] with logical (Neumann) boundary conditions.
-With this in mind, we build a Green's function \(\Delta(t, t^\prime)\) such that \[(\pdv[2]{t} + \omega^2) \Delta(t, t^\prime) = -\delta(t - t^\prime) \] with boundary conditions \( \Delta(t_a, t^\prime) = \Delta(t_b, t^\prime) = 0 \).
+With this in mind, we build a Green's function \(\Delta(t, t^\prime)\) such that \[\qty(\pdv[2]{t} + \omega^2) \Delta(t, t^\prime) = -\delta(t - t^\prime) \] with boundary conditions \( \Delta(t_a, t^\prime) = \Delta(t_b, t^\prime) = 0 \).
 
 We call \(\Delta\) the Feynman Propagator, and solve it as
 \begin{multline*}
@@ -558,7 +558,17 @@ You may notice the similarities between this and the previously derived quantum 
 This is intentional.
 The equation maps out ``trees of four-point interactions'' somehow.
 
-
+\section{And again, it all becomes wibbly and weird}
+We take our forced harmonic oscillator and sort it out so that
+\begin{align*}
+  S_0[x]_J &= \int_{t_a}^{t_a} \qty(\frac{m}{2} (\dot{x}^2 - \omega^2 x^2) + Jx)\dd{t} & S_1[x] &= -\frac{\lambda}{4} \int_{t_a}^{t_b} x^4 \dd{\tau}.
+\end{align*}
+This makes our transition (using functional derivatives)
+\begin{align*}
+  \mel{x_b, t_b}{T(\hat{x}(t_1)\cdots\hat{x}(t_m))}{x_a, t_a}_J &= \int x(t_1)\cdots x(t_m)\,e^{\frac{i}{\hbar}S[x]_J} \DD{x}\\
+  &= \int x(t_1)\cdots x(t_m)\,e^{\frac{i}{\hbar}S[x]_0 + \int_{t_a}^{t_b} J(t) x(t) \dd{t}} \DD{x}\\
+  &= \qty(\frac{\hbar}{i})^m \frac{\delta^m}{\delta J(t_1)\,\cdots\,\delta J(t_m)} \braket{x_b, t_b}{x_a, t_a}_J
+\end{align*}
 
 \chapter{Lots of Little Things Moving Around Really Rather Quickly\ldots Maybe}
 
