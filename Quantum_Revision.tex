@@ -353,13 +353,14 @@ There's an identity\footnote{which I genuinely don't see the use of} which is th
 for\ldots reasons\ldots
 Using this identity, we can get rid of the factorials and find that
 \begin{align*}
-    \braket{x_b, t_b}{x_a, t_a} &= \braket{x_b, t_b}{x_a, t_a}_0 + \sum_{n=1}^\infty \qty(\frac{i}{\hbar})^2 \prod_{k=1}^{n} \int_{t_a}^{t_{n+1}} \dd{t_n} \int_{x_a}^{x_b} \DD{x} \prod_{m=1}^{n}V(x(t_m), t_m) e^{\frac{i}{\hbar} S_0[x(t)] }.
+    \braket{x_b, t_b}{x_a, t_a} &= \braket{x_b, t_b}{x_a, t_a}_0 + \sum_{n=1}^\infty \qty(-\frac{i}{\hbar})^n \prod_{k=1}^{n} \int_{t_a}^{t_{n+1}} \dd{t_n} \int_{x_a}^{x_b} \DD{x} \prod_{m=1}^{n}V(x(t_m), t_m) e^{\frac{i}{\hbar} S_0[x(t)] }.
 \end{align*}
 
 Some rewriting can occur, it all makes a meal out of getting to a statement which feels sort of intuitive, \begin{equation*}
   \braket{x_b, t_b}{x_a, t_a} = \braket{x_b, t_b}{x_a, t_a}_0  - \frac{i}{\hbar} \int_{-\infty}^\infty \dd{x} \int_{t_a}^{t_b} \dd{t} \braket{x_b, t_b}{x, t}_0 V(x, t) \braket{x, t}{x_a, t_a}.
 \end{equation*}
 This looks a little funky, but it's fine really; look at it as a weird application of the Green's function at different times.
+It's worth noting that the last term (the \( \braket{x, t}{x_a, t_a}\)) is in relation to the full action, not just the unperturbed, so this is actually a hugely telescoping thing, which we can choose to use as many or as few terms of it as wanted.
 
 We can apply this for a general wavefunction as
 \begin{align*}
@@ -496,6 +497,47 @@ If we have two indistinguishable particles, then there are two indistinguishable
 This allows us to distinguish between fermions and bosons, since the result will be different due to the spin statistics theorem (fermions are antisymmetric).
 
 \section{Operator?}
+We can develop perturbation with the time evolution operator.
+We define a new picture, the Dirac picture, which is the same as the Heisenberg picture but is done with respect to \( S_0 \) instead of \(S\), such that
+\begin{equation*}
+  i\hbar \pdv{t} \hat{U}_0 = \hat{H}_0 \hat{U}_0
+\end{equation*}
+for a time dependent Hamiltonian, and
+\begin{equation*}
+  \hat{U}_0 = \exp[\frac{i}{\hbar} (t - t_0) \hat{H}_0].
+\end{equation*}
+This allows us to define a new set of Heisenberg operators, for example
+\[ \hat{x}_0 (t) = \hat{U}_0^\dagger (t, t_0) \, \hat{x} \,  \hat{U}_0(t, t_0)\]
+
+\section{Time Dependent Transition}
+Going all of the way back to the statement for the perturbative transition amplitude series, we can put the whole thing into the operator formalism, such that
+\begin{align*}
+  \hat{U}(t_a, t_b) &= \hat{U}_0 (t_b, t_a) + \sum_{n=1}^\infty (-\frac{i}{\hbar})^n \int^{t_b}_{t_a} \dd{t_n} \cdots \int^{t_2}_{t_a} \dd{t_1}\\
+  &\mspace{100mu}\times \hat{U}_0(t_b, t_n) V(\hat{x}, t_n) \hat{U}_0(t_n, t_{n-1}) \cdots V(\hat{x}, t_1) \hat{U}_0(t_1, t_a)\\
+  &= \hat{U}_0 (t_b, t_a) -\frac{i}{\hbar} \int^{t_b}_{t_a} \dd{t_n} \hat{U}_0(t_b, t) V(\hat{x}, t) \hat{U}(t, t_{a})\\
+\end{align*}
+
+Now we remember that in the energy basis, \(\hat{H}_0\) is a diagonal operator, which is useful, since \[ \braket{m,t}{n^\prime, t^\prime} = e^{-\frac{i}{\hbar}(t - t^\prime)E_n} \delta_{mn}.\]
+
+Using this for the transition gives
+\begin{align*}
+  \braket{b, t_b}{a, t_a} &= \mel{b}{\hat{U}(t_b, t_a)}{a}\\
+  &= \mel{b}{\hat{U}_0(t_b, t_a)}{a} - \frac{i}{\hbar} \int_{t_a}^{t_b} \mel{b}{\hat{U}(t_b, t)V(\hat{x}, t)\hat{U}(t, t_a)}{a} \dd{t} + \cdots\\
+  &= e^{-\frac{i}{\hbar}(t_b - t_a)E_a}\delta_{ab} - e^{-\frac{i}{\hbar}(E_bt_b - E_at_a)} \int_{t_a}^{t_b} \dd{t} e^{\frac{i}{\hbar}t (E_b - E_a)}V_{ba}(t)+ \cdots
+\end{align*}
+which corresponds to more and more interactions you add more potential interactions at different times (as number of terms increases).
+
+Using this statement, we can see the first order interaction probability is
+\begin{align*}
+   P(a \to b) &= \frac{1}{\hbar^2} \abs{\tilde{V}_{ba}}^2\intertext{where}
+   \tilde{V}_{ba}(t) &= \int_{t_a}^{t_b} \dd{t}V_{ba}(t) \intertext{where we have defined by convention}
+   V_{ab} &\equiv \mel{a}{V(\hat{x}, t)}{b} = \int_{-\infty}^\infty u_m^\ast(x) V(x, t) u_n(x).
+\end{align*}
+
+If the perturbation is time independent, we derive Fermi's golden rule for the transition rate, \[ R = \frac{2\pi}{\hbar}\abs{V_{ba}}^2 \rho(E_b) \] which is covered extensively elsewhere.
+
+\chapter{Richard Feynman Sticks His Boot In}
+
 
 
 \chapter{Lots of Little Things Moving Around Really Rather Quickly\ldots Maybe}
