@@ -470,6 +470,32 @@ where \( k = \frac{1}{\hbar} \abs{\vec{p}_a - \vec{p}_b} = \frac{2p}{\hbar}\sin(
 \end{example}
 
 \section{Shooting Beams at Each Other}
+Two particles with masses \(m_1\) and \(m_2 \) interact with each other with a potential from either (effectivley pairwise).
+The system has a two-variable Lagrangian
+\[ L = \frac{1}{2}m_1 \abs{\pdv{\vec{r}_1}{t}}^2 + \frac{1}{2}m_2 \abs{\pdv{\vec{r}_2}{t}}^2 - V(\vec{r}_1 - \vec{r}_2). \]
+We shuffle this into the centre-of-mass frame, defining the postition of the centre of mass,
+\begin{align*}
+  \vec{R} &= \frac{m_1 \vec{r}_1 + m_2 \vec{r}_2}{M} & M &= m_1 + m_2 \intertext{and relative motion within the system}
+  \vec{r} &= \vec{r}_1 - \vec{r}_2 & \mu &= \frac{ m_1 m_2 }{m_1 + m_2}
+\end{align*}
+to give us a new Lagrangian
+\[ L = \frac{1}{2} M \abs{\pdv{\vec{R}}{t}}^2 + \frac{1}{2}\mu \abs{\pdv{\vec{r}}{t}}^2 - V(\vec{r}). \]
+In the centre-of-mass frame, \(\vec{R} = 0\), and \(L = \frac{1}{2}\mu \abs{\pdv{\vec{r}}{t}}^2 - V(\vec{r})\) which is the same as for the fixed-target, so we can use the same result as earlier, but define a new function
+\begin{align*}
+  \dv{\sigma}{\Omega} &= \qty(\frac{\mu}{2\pi\hbar^2})^2 \abs{\tilde{V}(\vec{k})}^2\\
+  &\equiv \abs{f(\theta, \phi)}^2
+\end{align*}
+which we call the scattering amplitude.
+
+We use the Born-Oppenheimer approximation where we assume one particle much more massive than the other, and this recovers the fixed-particle result.
+
+If we have two indistinguishable particles, then there are two indistinguishable outcomes of the collision, resulting in
+\begin{align*}
+  \dv{\sigma}{\Omega} &= \abs{f(\theta) + f(\pi - \theta)}^2.
+\end{align*}
+This allows us to distinguish between fermions and bosons, since the result will be different due to the spin statistics theorem (fermions are antisymmetric).
+
+\chapter{Operator?}
 
 
 \chapter{Lots of Little Things Moving Around Really Rather Quickly\ldots Maybe}
