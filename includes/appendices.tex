@@ -52,3 +52,27 @@ We set
       &= \sqrt{\frac{i\pi}{N+1}}\exp[i \nicefrac{(x_{N+1} - x_0)^2}{N+1}]
 \end{align*}
 which is a nice enough statement.
+
+\chapter{Functional Derivatives}
+A functional derivative generalises the derivative from
+\begin{align*}
+  \pdv{J_i}\sum_j J_j x_j &= x_i & \pdv{J_i} &= \delta_{ij}
+\end{align*}
+to cover a smooth function on a continuous domain such that
+\begin{align*}
+  \pdv{J(t)}J(t^\prime) &= \delta(t-t^\prime) & \fdv{J(t)}  \int_{t_a}^{t_b} J(t^\prime) x(t^\prime) \dd{t^\prime} &= \int_{t_a}^{t_b} \delta(t - t^\prime) x(t^\prime) \dd{t^\prime}\\
+  &&&= \begin{cases}
+    x(t) & t_a < t^\prime < t_b\\
+    0 & \text{otherwise}.
+  \end{cases}
+\end{align*}
+
+Functional derivatives have the following properties:
+\begin{description}
+  \item [Linearity] \[ \fdv{(\lambda F + \mu G)[\rho]}{\rho(x)} = \lambda \fdv{F[\rho]}{\rho(x)} + \mu \fdv{G[\rho]}{\rho(x)}\]
+  for \(\lambda, \mu\) constant,
+  \item [Chain Rule] \[ \fdv{(FG)[\rho]}{\rho} = \fdv{F[\rho]}{\rho(x)}G[\rho] + F[\rho]\fdv{F[\rho]}{\rho(x)} \]
+  \item [Product Rules] These are logical. Look them up if you need them.
+\end{description}
+
+We can use an equivalent of the Euler-Lagrange equation to find the functional derivative, \[ \fdv{F}{\rho(r)} = \pdv{f}{\rho} - \partial^\mu \pdv{f}{\qty(\partial^\mu \rho)}.\]

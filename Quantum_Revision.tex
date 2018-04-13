@@ -537,6 +537,26 @@ Using this statement, we can see the first order interaction probability is
 If the perturbation is time independent, we derive Fermi's golden rule for the transition rate, \[ R = \frac{2\pi}{\hbar}\abs{V_{ba}}^2 \rho(E_b) \] which is covered extensively elsewhere.
 
 \chapter{Richard Feynman Sticks His Boot In}
+We go back to classical mechanics for a bit, in order to motivate the point of the exercise.
+A forced \emph{an}harmonic oscillator has an action \(S = S_0[x]_J\footnote{I'm not certain about this notation, but I know for sure and certain I don't like the one in the notes. It's alsoc significantly different to the one I used earlier.} + S_1[x]\) with Lagrangian \[L = L_{\text{Driven SHO}} - \frac{\lambda}{4}x^4 \] and
+\[ \qty(\pdv[2]{t} + \omega^2)x = \frac{J}{x} - \frac{\lambda}{m}x^3.\]
+
+
+\section{GREEEEEEEN *waves fist*}
+We have the homogeneous equation \[ \qty(\pdv[2]{t} + \omega^2) \bar{x}_0 = 0 \] with logical (Neumann) boundary conditions.
+With this in mind, we build a Green's function \(\Delta(t, t^\prime)\) such that \[(\pdv[2]{t} + \omega^2) \Delta(t, t^\prime) = -\delta(t - t^\prime) \] with boundary conditions \( \Delta(t_a, t^\prime) = \Delta(t_b, t^\prime) = 0 \).
+
+We call \(\Delta\) the Feynman Propagator, and solve it as
+\begin{multline*}
+  \Delta(t, t^\prime) = \frac{1}{\omega \sin\omega T}\big[\theta(t - t^\prime)\sin\omega(t_b - t)\,\sin\omega(t^\prime-t_a) \\+ \theta(t^\prime - t)\sin\omega(t_b - t^\prime)\,\sin\omega(t-t_a)\big]
+\end{multline*}
+which means that (as usual) the full solution for the classical solution is
+\begin{align*}
+  \bar{x}(t) = \bar{x}_0(t) + \frac{1}{m}\int_{t_a}^{t_b} \Delta(t, t^\prime) \qty(-J(t^\prime) + \lambda \bar{x}(t^\prime)^3) \dd{t^\prime}.
+\end{align*}
+You may notice the similarities between this and the previously derived quantum perturbation theories.
+This is intentional.
+The equation maps out ``trees of four-point interactions'' somehow.
 
 
 
