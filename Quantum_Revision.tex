@@ -580,16 +580,35 @@ We expand \(\exp[\frac{i}{\hbar} S_1[x]] = \exp[-\frac{i}{\hbar} \frac{ \lambda 
 \end{align*}
 
 If we make the assumptions required to use the Feynman Propagator, we can find a general expression for the correlation functions
-\begin{align*}
-  \frac{1}{F_\omega(T)} \mel{0, t_b}{T(\hat{x}(t_1)) \cdots T(\hat{x}(t_n))}{0, t_a} &= \qty(\frac{\hbar}{i})^m \frac{\delta^m}{\delta J(t_1)\,\cdots\,\delta J(t_m)} \exp[-\frac{i\lambda}{4\hbar} \qty(\frac{\hbar}{i}\fdv[k]{J(\tau_k)})^4] F_\omega(T) \exp[\frac{i}{\hbar} \int_{t_a}^{t_b}\int_{t_a}^{t_b}J(t)\Delta(t, t^\prime)J(t^\prime)\dd{t^\prime}\dd{t}].
-\end{align*}
+\begin{multline*}
+  \frac{1}{F_\omega(T)} \mel{0, t_b}{T(\hat{x}(t_1)) \cdots T(\hat{x}(t_n))}{0, t_a} \\= \qty(\frac{\hbar}{i})^m \frac{\delta^m}{\delta J(t_1)\,\cdots\,\delta J(t_m)} \exp[-\frac{i\lambda}{4\hbar} \qty(\frac{\hbar}{i}\fdv[k]{J(\tau_k)})^4]\\\times \exp[\frac{i}{\hbar} \int_{t_a}^{t_b}\int_{t_a}^{t_b}J(t)\Delta(t, t^\prime)J(t^\prime)\dd{t^\prime}\dd{t}].
+\end{multline*}
 
 \section{Special Results}
 We have Wick's Theorem for the \( n\)-point correlation function (time ordered product of \(n\) position operators) which is that for a pure forced simple harmonic oscillator,
 \begin{align*}
-  \frac{1}{F_\omega (T)} \mel{0, t_b}{T(\hat{x}(t_1)) \cdots T(\hat{x}(t_n))}{0, t_a}_{J=0} &= \qty(\frac{i\hbar}{m})^{\nicefrac{m}{2}} \sum_{\text{all pairings}}\Delta(t_{i_1}, t_{i_2})\cdots \Delta(t_{i_{m-1}}, t_{i_m}).
+  \frac{1}{F_\omega (T)} \mel{0, t_b}{T(\hat{x}(t_1) \cdots \hat{x}(t_n))}{0, t_a}_{J=0} &= \qty(\frac{i\hbar}{m})^{\nicefrac{m}{2}} \sum_{\text{all pairings}}\Delta(t_{i_1}, t_{i_2})\cdots \Delta(t_{i_{m-1}}, t_{i_m}).
 \end{align*}
 
+By considering the first order of the first exponential (the anharmonic term), we can derive the first of the Feynman rules.
+It's worth noting that in the integrals, we only care about terms which keep a \( J(\tau) \) after functional differentiation, so the entire thing reduces to \[\frac{1}{F_\omega(T)} \mel{0, t_b}{T(\hat{x}(t_1) \hat{x}(t_2) \hat{x}(t_3) \hat{x}(t_4)) }{0, t_a}_{J=0} = -i \frac{3!\, \lambda}{\hbar}\int_{t_a}^{t_b} \dd{t} \prod_{i=1}^{4}(\frac{i\hbar}{m}\Delta(t, t_i))\]
+which represents an interaction (or a crossing point on a Feynman diagram) since they all four propagators go terminate or start at \(t\).
+
+\section{Doing It Over All Time}
+None of these integrals converge for all times, since \(\Delta(t, t^\prime)\) doesn't have a limit and oscillates \emph{wildly}.
+We have three choices in this case, which are all roughly equivalent:
+\begin{enumerate}
+  \item Take \( t = -i\tau \) as is the case in Statistical Mechanics\footnote{which is one of the examples which were skipped earlier}
+  \item Rotate \(t\) in the complex plane, such that \( t \mapsto t - i\epsilon \)
+  \item Dampen the path integral by mapping \[ S^\prime = S + i\epsilon \int_{-\infty}^\infty x^2 \dd{t} \] which is called the `\(i\epsilon\) prescription'. In this prescription we have \( (\omega^\prime)^2 = \omega^2 - i \epsilon \).
+\end{enumerate}
+
+For the propagator over all time, we define a new, cooler version which does everything the old one does and converges.
+With all of the rewriting we've done, this feels like an anticlimax, but we find that
+\begin{align*}
+  \lim_{t_b\to \infty}\lim_{t_a\to -\infty}\Delta(t, t^\prime) &= \frac{1}{2i\omega}\qty(e^{-i\omega(t-t^\prime)} \theta(t-t^\prime) + e^{i\omega(t-t^\prime)} \theta(t^\prime - t))\\
+  &= \Delta_F(t- t^\prime)
+\end{align*}
 
 \chapter{Lots of Little Things Moving Around Really Rather Quickly\ldots{} Maybe}
 
