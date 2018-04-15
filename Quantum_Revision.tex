@@ -567,10 +567,31 @@ This makes our transition (using functional derivatives)
 \begin{align*}
   \mel{x_b, t_b}{T(\hat{x}(t_1)\cdots\hat{x}(t_m))}{x_a, t_a}_J &= \int x(t_1)\cdots x(t_m)\,e^{\frac{i}{\hbar}S[x]_J} \DD{x}\\
   &= \int x(t_1)\cdots x(t_m)\,e^{\frac{i}{\hbar}S[x]_0 + \int_{t_a}^{t_b} J(t) x(t) \dd{t}} \DD{x}\\
-  &= \qty(\frac{\hbar}{i})^m \frac{\delta^m}{\delta J(t_1)\,\cdots\,\delta J(t_m)} \braket{x_b, t_b}{x_a, t_a}_J
+  &= \qty(\frac{\hbar}{i})^m \frac{\delta^m}{\delta J(t_1)\,\cdots\,\delta J(t_m)} \braket{x_b, t_b}{x_a, t_a}_J.
 \end{align*}
 
-\chapter{Lots of Little Things Moving Around Really Rather Quickly\ldots Maybe}
+\subsection{Wibblier and Weirder}
+We expand \(\exp[\frac{i}{\hbar} S_1[x]] = \exp[-\frac{i}{\hbar} \frac{ \lambda }{4}\int_{t_a}^{t_b} \dd{\tau} x(\tau)^4]\) to get a perturbation expansion for the anharmonic oscillator
+\begin{align*}
+  \braket{x_b, t_b}{x_a, t_a}_J &= \int_{x_a}^{x_b} \DD{x} \exp[\frac{i}{\hbar}(S_0[x]_J + S_1[x])]\\
+  &= \sum_{n=0}^{\infty} \frac{1}{n!} \qty(-\frac{i\lambda}{4\hbar})^n \int_{t_a}^{t_b} \dd{\tau_1} \cdots \int_{t_a}^{t_b} \dd{\tau_n}  \int_{x_a}^{x_b} \DD{x} x(\tau_1)^4 \cdots x(\tau_2)^4 e^{\frac{i}{\hbar} S_0[x]_J} \\
+  &= \sum_{n=0}^{\infty} \frac{1}{n!} \qty(-\frac{i\lambda}{4\hbar})^n \qty[\prod_{k=1}^n \int_{t_a}^{t_b} \dd{\tau_k} \qty{\frac{\hbar}{i}\fdv[k]{J(\tau_k)}}^4] \int_{x_a}^{x_b} \DD{x}  e^{\frac{i}{\hbar} S[x]_J}\\
+  &= \exp[-\frac{i\lambda}{4\hbar} \qty(\frac{\hbar}{i}\fdv[k]{J(\tau_k)})^4] F_\omega(T) \exp[\frac{i}{\hbar} S[\bar{x}]_J].
+\end{align*}
+
+If we make the assumptions required to use the Feynman Propagator, we can find a general expression for the correlation functions
+\begin{align*}
+  \frac{1}{F_\omega(T)} \mel{0, t_b}{T(\hat{x}(t_1)) \cdots T(\hat{x}(t_n))}{0, t_a} &= \qty(\frac{\hbar}{i})^m \frac{\delta^m}{\delta J(t_1)\,\cdots\,\delta J(t_m)} \exp[-\frac{i\lambda}{4\hbar} \qty(\frac{\hbar}{i}\fdv[k]{J(\tau_k)})^4] F_\omega(T) \exp[\frac{i}{\hbar} \int_{t_a}^{t_b}\int_{t_a}^{t_b}J(t)\Delta(t, t^\prime)J(t^\prime)\dd{t^\prime}\dd{t}].
+\end{align*}
+
+\section{Special Results}
+We have Wick's Theorem for the \( n\)-point correlation function (time ordered product of \(n\) position operators) which is that for a pure forced simple harmonic oscillator,
+\begin{align*}
+  \frac{1}{F_\omega (T)} \mel{0, t_b}{T(\hat{x}(t_1)) \cdots T(\hat{x}(t_n))}{0, t_a}_{J=0} &= \qty(\frac{i\hbar}{m})^{\nicefrac{m}{2}} \sum_{\text{all pairings}}\Delta(t_{i_1}, t_{i_2})\cdots \Delta(t_{i_{m-1}}, t_{i_m}).
+\end{align*}
+
+
+\chapter{Lots of Little Things Moving Around Really Rather Quickly\ldots{} Maybe}
 
 \include{includes/appendices}
 \printbibliography
