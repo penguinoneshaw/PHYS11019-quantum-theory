@@ -22,6 +22,7 @@
 \RequirePackage{booktabs}
 \RequirePackage{bbm}
 \RequirePackage{cancel}
+\RequirePackage{slashed}
 \RequirePackage[sorting=none,bibencoding=utf8,giveninits,uniquename=init]{biblatex}
 
 \KOMAoption{chapterprefix}{true}

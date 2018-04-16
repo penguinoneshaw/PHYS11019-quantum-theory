@@ -759,8 +759,53 @@ and the positive-energy solutions become
 \begin{align*}
   \psi^{(i)} &= e^{-i\frac{mc^2}{\hbar}t}\, w^{(i)}
 \end{align*}
-which means that they are degenerate, and there must be some other operator in the good quantum numbers.
+which means that they are degenerate, and there must be some other operator in the good quantum numbers for the rest frame.
 
+We call this new operator \[\hat{\Sigma}^3 = \smqty(\dmat{1,-1,1,-1}) \] of which the four \(w\) spinors are all eigenvectors\footnote{Eigenspinors? What \emph{is} a spinor? How is it special? This entire section has some very questionable notation.} with values \(\pm 1\).
+That this is in fact part of a wider definition that
+\begin{align}
+  \hat{\Sigma}^i &\equiv \mqty(\dmat{\sigma^i,\sigma^i})
+\end{align}
+is what leads us to believe that these are spin-\(\nicefrac{1}{2}\) particles.
+This comes from us defining \(\hat{s}^i = \nicefrac{1}{2} \hbar \hat{\Sigma}^i \) which is exactly the spin operator.
+This only commutes in the rest frame, as does the angular momentum \(\hat{\vec{L}} = \hat{\vec{r}}\times \hat{\vec{p}} \), so neither of these are conserved, or good quantum numbers.
+However, the total angular momentum \( \hat{\vec{J}} \) commutes with the Dirac Hamiltonian in all frames.
+
+\subsection{Helicity}
+We can define a different operator which also commutes with the Hamiltonian, the Helicity operator
+\begin{align*}
+  \hat{h}(\vec{p}) &= \mqty(\frac{\vec{\sigma}\vdot \vec{p}}{\abs{\vec{p}}} & 0 \\ 0 & \frac{\vec{\sigma}\vdot \vec{p}}{\abs{\vec{p}}}) \\
+  &\propto \hat{\vec{\Sigma}} \vdot \frac{\vec{p}}{\abs{\vec{p}}}
+\end{align*}
+which has eigenvalues \(\pm 1 \) --- this is the particle's spin along the direction of motion.
+
+\section{The Dirac Sea}
+Dirac proposed that all negative energy states are filled, with each energy level holding two electrons --- a spin up and a spin down.
+The Pauli exclusion principle means that positive energy electrons can't just transition into a negative energy state without that state already being empty.
+The negative energy states are unobservable, and are completely full in a complete vaccuum.
+
+This is also a model for pair production.
+The negative energy electron takes \(2(E+mc^2)\) in energy to jump up into its relative positive energy state, leaving behind a `hole' in the sea, which in this model is the positron (discovered after the model).
+
+Quantum field theory fixes the issue that this model doesn't work for bosons.
+
+\section{Covariant Dirac Equation}
+The Dirac Equation can be rewritten from
+\begin{align*}
+  i\hbar \pdv{t} \psi(\vec{r}, t) &= \qty(-i\hbar c \vec{\alpha}\vdot\grad{} + \beta{} mc^2)\,\psi(\vec{r}, t)\intertext{to}
+  0 &= \qty[i\hbar\qty(\gamma^0 \pdv{x^0} + \gamma^i \pdv{x^i}) - mc] \psi(\vec{r}, t)
+\end{align*}
+where we have defined
+\begin{align*}
+  \gamma &\equiv (\beta, \beta\vec{\alpha}).
+\end{align*}
+
+We also now define the Feynman Slash notation, \[\slashed{a} \equiv \gamma^\mu a_\mu \] which is the contraction with the \(\gamma\) spinor.
+This allows us to reduce this expression to \[ (i \hbar \slashed{\partial} mc) \psi(x) = 0\] which is really very simple.
+
+The plane wave solutions reduce to \[ \psi(x) = -e^{-\nicefrac{i}{\hbar}p\vdot x} u(p, s) \] where this satisfies
+\[ (\slashed{p} - mc)\, u(p, s) = 0 \]
+and we've made new, less awkward to write positive energy spinors \[ u(p, s) \equiv w^{(s)}(p).\]
 
 
 \include{includes/appendices}
