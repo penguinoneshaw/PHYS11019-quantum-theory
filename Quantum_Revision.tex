@@ -611,6 +611,34 @@ With all of the rewriting we've done, this feels like an anticlimax, but we find
 \end{align*}
 
 \chapter{Lots of Little Things Moving Around Really Rather Quickly\ldots{} Maybe}
+\section{The Klein-Gordon equation}
+In special relativity\footnote{I've skipped the four-vector stuff}, we know that the energy of a particle is given by
+\[ E^2 = p^2 c^2 + m^2 c^4 \]
+which mean that if we use the standard substitutions (\(E \mapsto i\hbar \pdv{t}\) and \(\vec{p}\mapsto i\hbar\grad\)) which allows us to derive
+\begin{align*}
+  m^2 c^4 \phi(\vec{r}, t) - \hbar^2 c^2 \laplacian \phi(\vec{r}, t) &= -\hbar^2 \pdv[2]{t}\phi(\vec{r}, t)\\
+  \implies \qquad (\hbar^2\partial^2 + m^2 c^2)\phi(\vec{r}, t) &= 0
+\end{align*}
+which is the Klein-Gordon equation for the free particle. This is solvable with a 4-vector plane wave expression \[\phi(x) = e^{-ik\vdot x} \equiv e^{-i\frac{p}{\hbar}\vdot x}.\]
+
+This has a couple of problems.
+Firstly, our basic idea that \(\hbar^2( \omega^2 - c^2 \vec{k}^2 ) = m^2 c^4\) implies that there are negative energy particles; we'll deal with that later.
+
+Secondly, we can derive the probability current for the Schr\"odinger equation \[0 = \psi^\ast (\text{SE})  - \psi (\text{SE})^\ast \] which expands to
+\[\pdv{\rho}{t} + \div\vec{j} = 0\]
+where we find that
+\begin{align*}
+  \rho &= \psi^\ast \psi & \vec{j} &= -\frac{i\hbar}{2m}\qty(\psi^\ast \grad\psi - \psi \grad\psi^\ast)
+\end{align*}
+and for the Klein Gordon equation,
+\begin{align*}
+  \rho &= \frac{i\hbar}{2mc^2}\qty(phi^\ast \pdv{t}\phi - phi \pdv{t}\phi^\ast) & \vec{j} &= -\frac{i\hbar}{2m}\qty(\phi^\ast \grad\phi - \phi \grad\phi^\ast)
+\end{align*}
+which has the issue that \(\rho\), the probability density, is not positive definite, so we can't interpret it \emph{as} a probability density.
+
+\section{Yet another thing named after Dirac}
+To combat the two negative things, we try to find a different relativistic wave equation which is linear in \( \pdv{t}\).
+We 
 
 \include{includes/appendices}
 \printbibliography
