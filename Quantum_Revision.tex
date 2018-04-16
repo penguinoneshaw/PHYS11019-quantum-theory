@@ -678,6 +678,90 @@ which gives the covariant form of the continuity equation as \[\partial_\mu j^\m
 This is now perfectly well defined for the probability density (huzzah!).
 
 \section{Just Leave It Alone. It's The Only Thing To Do}
+Free particle \(\implies \) plane wave, as always.
+However, we need a spinor version, so we invent a new spinor, \(w(p)\) which gives us
+\begin{align*}
+  \psi(\vec{r}, t) &= \exp(-\frac{i}{\hbar}p\vdot x)\,w(p)\\
+  &= \exp(-\frac{i}{\hbar}(cp^0 t - \vec{p}\vdot\vec{r}))\,w(p).
+\end{align*}
+This leads us to a slightly different form of the Dirac equation,
+\begin{align}
+  p^0 w (p) &= (\vec{\alpha} \vdot \vec{p} + \beta m c)\, w(p)\label{eqn:pspace}
+\end{align}
+ called the \(p\)-space Dirac equation.
+
+ This can be solved elegantly using a slightly funky formalism where
+ \[ w(p) = \mqty(\phi(p)\\\chi(p))\] which is a four-component spinor in terms of two two-component spinors.
+ This makes \autoref{eqn:pspace}
+ \begin{align*}
+   p^0 \mqty(\phi\\\chi) &= \mqty(mc & \vec{\sigma}\vdot \vec{p} \\ \vec{\sigma}\vdot \vec{p} & -mc ) \mqty(\phi\\\chi)
+ \end{align*}
+ which shows this off as an eigenvalue equation, which is nice, because we know how to solve them.
+ Whatever your method of choice, you can find that
+ \begin{align*}
+   \chi &= \frac{\vec{\sigma}\vdot\vec{p}}{p^0 + mc}\phi\\
+   p_0 \phi &= \qty(mc + \frac{(\vec{\sigma}\vdot \vec{p})^2}{p^0 + mc})\phi
+ \end{align*}
+which apparently shows that
+\[(p^0)^2 = m^2c^2 + \vec{p}^2\]
+but I'm unconvinced.
+
+\subsection{Can a particle have Feng Shui?}
+As usual, we identify \(p^0 = \nicefrac{E}{c}\) with the energy of the particle.
+We thus write the positive energy solutions as
+\begin{align*}
+  w^{(i)}(p) &= \mqty(\phi^{(i)}\\\frac{c \vec{\sigma}\vdot\vec{p} }{E + mc^2}\phi^{(i)}) & \phi^{(1)} &= \mqty(1\\0) & \phi^{(2)} &= \mqty(0\\1)&  i \in { 1, 2 }
+\end{align*}
+where we have conventionally chosen the spinors (which have to be linearly independent, and preferably orthogonal).
+
+This gives us that
+\begin{align*}
+  w^{(1)}(p) &= \begin{pmatrix}
+    1 \\ 0\\
+    \frac{cp^3}{E+mc^2} \\ \frac{c(p^1 + i p^2)}{E+mc^2}
+  \end{pmatrix} &
+  w^{(2)}(p) &= \begin{pmatrix}
+    0\\ 1\\
+    \frac{c(p^1 + i p^2)}{E+mc^2} \\ \frac{-cp^3}{E+mc^2}
+  \end{pmatrix}
+\end{align*}
+where it's worth noticing that \( \vec{\sigma}\vdot \vec{p} \) is not a scalar, since \(\vec{\sigma}\) is a horrible abuse of notation for the three Pauli matrices.
+
+\subsection{Negative Energy}
+The negative energy solutions (\(p^0 = - \nicefrac{E}{C}\)) are written in terms of \(\chi\), and conventionally we find that
+\begin{align*}
+  w^{(i)}(-p) &= \mqty(\frac{c \vec{\sigma}\vdot\vec{p} }{E + mc^2}\chi^{(i-2)}\\\chi^{(i-2)}) & \chi^{(1)} &= \mqty(0\\1) & \chi^{(2)} &= \mqty(1\\0) &  i \in { 3, 4 }.
+\end{align*}
+We choose the negative energy states to have negative momentum because of the Dirac Sea interpretation of particle physics in a faintly vector like object which can be iterated over.
+
+This gives us that
+\begin{align*}
+  w^{(3)}(-p) &= \begin{pmatrix}
+    \frac{c(p^1 + i p^2)}{E+mc^2} \\ \frac{-cp^3}{E+mc^2}\\
+    0\\ 1
+  \end{pmatrix} &
+  w^{(4)}(-p) &= \begin{pmatrix}
+    \frac{cp^3}{E+mc^2} \\ \frac{c(p^1 + i p^2)}{E+mc^2}\\
+    1 \\ 0
+  \end{pmatrix}
+\end{align*}
+which represent the negative energy states of a spin-\(\nicefrac{1}{2}\) particle.
+
+\section{Let's stop it all moving around, just to keep track}
+When \(\vec{p} = 0\), the \(w\) spinors become orthonormal, and we conventionally write them as
+\begin{align*}
+  w^{(1)} &= \mqty(1\\0\\0\\0) &
+  w^{(2)} &= \mqty(0\\1\\0\\0) &
+  w^{(3)} &= \mqty(0\\0\\0\\1) &
+  w^{(4)} &= \mqty(0\\0\\1\\0)
+\end{align*}
+and the positive-energy solutions become
+\begin{align*}
+  \psi^{(i)} &= e^{-i\frac{mc^2}{\hbar}t}\, w^{(i)}
+\end{align*}
+which means that they are degenerate, and there must be some other operator in the good quantum numbers.
+
+
 
 \include{includes/appendices}
 \printbibliography
