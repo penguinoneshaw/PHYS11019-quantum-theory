@@ -801,11 +801,35 @@ where we have defined
 \end{align*}
 
 We also now define the Feynman Slash notation, \[\slashed{a} \equiv \gamma^\mu a_\mu \] which is the contraction with the \(\gamma\) spinor.
-This allows us to reduce this expression to \[ (i \hbar \slashed{\partial} mc) \psi(x) = 0\] which is really very simple.
+This allows us to reduce this expression to \[ (i \hbar \slashed{\partial}- mc) \psi(x) = 0\] which is really very simple.
 
-The plane wave solutions reduce to \[ \psi(x) = -e^{-\nicefrac{i}{\hbar}p\vdot x} u(p, s) \] where this satisfies
+The plane wave solutions reduce to \[ \psi(x) = e^{-\nicefrac{i}{\hbar}p\vdot x} u(p, s) \] where this satisfies
 \[ (\slashed{p} - mc)\, u(p, s) = 0 \]
-and we've made new, less awkward to write positive energy spinors \[ u(p, s) \equiv w^{(s)}(p).\]
+and we've made a new, less awkward to write positive energy spinors \[ u(p, s) \equiv w^{(s)}(p).\]
+
+The negative energy states are the same, with \[ \psi(x) = e^{\nicefrac{i}{\hbar}p\vdot x} v(p, s) \] where this satisfies
+\[ (\slashed{p} + mc)\, v(p, s) = 0 \] and we've defined \[v(p, s) \equiv w^{(s + 2)}(-p).\]
+
+The \(\gamma\) matrices satisfy the same anticommutation relations as we required earlier for \(\alpha\) and \(\beta\),
+\[ \anticommutator{\gamma^\mu}{\gamma^\nu} = 2 \eta^{\mu\nu} \]
+which is the requirements for a `Clifford Algebra'.
+
+We can see from
+\begin{align*}
+  \gamma^i &= \mqty(0 & \sigma^i\\ - \sigma^i & 0) & \gamma^0 &= \mqty(I&0\\0&-I)
+\end{align*} that \(\gamma^0\) is hermitian and \(\gamma^i \) is anti-hermitian, which we need.
+
+We also define
+\begin{align*}
+  \bar{\psi} &= \psi^\dagger \gamma^0
+\end{align*}
+which new notation is called the covariant formulation.
+
+We finally get to \[ j^\mu = \bar{\psi} \gamma^\mu \psi\] which conveniently transforms as a 4-vector.
+
+\begin{note}
+And from here, it's just applications. C'est dans la bo\^ite!
+\end{note}
 
 
 \include{includes/appendices}
