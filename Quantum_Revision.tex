@@ -638,7 +638,46 @@ which has the issue that \(\rho\), the probability density, is not positive defi
 
 \section{Yet another thing named after Dirac}
 To combat the two negative things, we try to find a different relativistic wave equation which is linear in \( \pdv{t}\).
-We 
+We start with the Schr\"odinger equation again, in the form
+\[ i\hbar\pdv{t}\psi(x) = \hat{H}\psi(x) \]
+which we make a reasonably radical ansatz for, and get
+\begin{align*}
+  i\hbar\pdv{t}\psi(\vec{r}, t) &= \qty[c \vec{\alpha}\vdot \vec{\hat{p}} + \beta m c^2]\psi(\vec{r}, t) \\
+  &= \hat{H}\psi(\vec{r}, t)
+\end{align*}
+where \(\vec{\alpha}\) and \(\beta\) are independent of all derivatives, so commute with all terms except each other.
+We also require that
+\[ \hat{H}^2 \psi = (c^2\vec{\hat{p}}^2 + m^2 c^4)\psi\]
+which after rearranging to compare with the previous ansatz gives us the anticommutator relations
+\begin{align*}
+  \anticommutator{\alpha^i}{\alpha^j} &= \delta^{ij} & \anticommutator{\alpha^i}{\beta} &= 0
+\end{align*}
+and note that \(\beta^2 = 1\).
+From these requirements, we guess that \(\alpha\) and \(\beta\) must actually be hermitian \(n \times n\) matrices. We also note that they must be traceless, and have eigenvalues of \(\pm 1\).
+We use the smallest representation of \(\alpha\) and \(\beta\) which is in four dimensional matrices,
+\begin{align*}
+  \beta &= \mqty(I&0\\0&-I) & \vec{\alpha}^i &= \mqty(0 & \sigma^i \\ \sigma^i & 0)
+\end{align*}
+where \(\sigma^i\) are the Pauli matrices,
+\begin{align*}
+  \sigma^1 &= \mqty(\pmat{1}) & \sigma^2 &= \mqty(\pmat{2}) & \sigma^3 &= \mqty(\pmat{3})
+\end{align*}
+ which are unitary, hermitian and satisfy the anti-commutation relation required.
+
+ The Hamiltonian is now a 4D matrix, so we must make a wavefunction to match. We give it a \emph{spinor}\footnote{pronounced ``spinner''} which is simply a four component column matrix (not a vector) in the format
+ \begin{align*}
+   \psi(\vec{r}, t) &= \mqty(\psi_1(\vec{r},t)\\ \psi_2(\vec{r},t)\\ \psi_3(\vec{r},t)\\ \psi_4(\vec{r},t)).
+ \end{align*}
+
+\subsection{Continuity}
+We go back to the continuity equation, and doing the same thing with the Dirac equation as we did with the others, we find that
+\begin{align*}
+  \rho &= \psi^\dagger \psi & \vec{j} &= \psi^\dagger \vec{\alpha} \psi & j^\mu &= \mqty(\rho, \vec{j})
+\end{align*}
+which gives the covariant form of the continuity equation as \[\partial_\mu j^\mu = 0. \]
+This is now perfectly well defined for the probability density (huzzah!).
+
+\section{Just Leave It Alone. It's The Only Thing To Do}
 
 \include{includes/appendices}
 \printbibliography
