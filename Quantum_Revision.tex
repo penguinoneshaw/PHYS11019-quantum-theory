@@ -175,7 +175,7 @@ You may notice that \( \nu(\varepsilon) \) diverges for infinitesimal \(\varepsi
 For a harmonic oscillator, the ``discretize time'' method becomes awkward to do; however, there's another thing we can try.
 Firstly, the Lagrangian for the harmonic oscillator is
 \[ L = \frac{1}{2} m \dot{x}^2 - \frac{1}{2}m \omega x^2\] from which we can calculate the classical action,
-\[ S_{\mathrm{cl}} = \frac{m\omega}{2\sin(\omega T)} [(x_a^2 + x_b^2)\cos(\omega T) - 2x_a x_b]\]
+\[ S_{\mathrm{cl}} = \frac{m\omega}{2\sin(\omega T)} \qty[(x_a^2 + x_b^2)\cos(\omega T) - 2x_a x_b]\]
 and the Newtonian equation of motion, \[ \ddot{x} + \omega^2 x = 0. \]
 
 We will write \( x = \bar{x} + \eta \) where \(\eta(t_a) = \eta(t_b) = 0\) is the deviation from the classical path (allowing us to use the variational principle).
@@ -207,7 +207,7 @@ This gives us
   F_\omega(T) = F_\omega(T - t)\, F_\omega(t) \sqrt{\frac{2\pi i \hbar}{m\omega} \frac{\sin\omega(T-t) \sin\omega t}{\sin \omega T}}
 \end{equation*}
 which we can look at and notice that \( F_\omega (T) \) should probably be
-\[ F_\omega (T) \sqrt{\frac{m\omega}{2\pi i \hbar} \frac{1}{\sin \omega T}} \] if we want the two other terms to cancel out. There's no systematic way of doing this really, though taking the \( T \gg t \) limit should result in the same.
+\[ F_\omega (T) = \sqrt{\frac{m\omega}{2\pi i \hbar} \frac{1}{\sin \omega T}} \] if we want the two other terms to cancel out. There's no systematic way of doing this really, though taking the \( T \gg t \) limit should result in the same.
 
 \section{Driven to Distraction}
 The forced harmonic oscillator has the Lagrangian
@@ -257,7 +257,7 @@ We say that an operator is conserved if \(\pdv{\hat{O}}{t} = \commutator{\hat{O}
 \section{A British Miller (who happened to be really good at Maths) Cometh}
 Moments of recognition might've triggered at some point that \( \braket{x_a, t_a}{x_b, t_b} \) is actually a Green's function of the Sch\"odinger equation, i.e.~
 \begin{align*}
-  (\hat{H} - i\hbar\pdv{t}) \braket{x, t}{x^\prime, t^\prime} &= -i\hbar \delta(t- t^\prime) \delta(x - x^\prime)
+  \qty(\hat{H} - i\hbar\pdv{t}) \braket{x, t}{x^\prime, t^\prime} &= -i\hbar \delta(t- t^\prime) \delta(x - x^\prime)
 \end{align*}
 although this isn't quite true, as the time parameter isn't fixed automatically.
 Specifically, this is the retarded Green's function, where we must impose causality, giving us
@@ -305,7 +305,7 @@ where we define the \emph{time ordered product} as \[ T(\hat{x}(t), \hat{x}(t^\p
 
 We can apply this to more general states \( \ket{\phi} \& \ket{\psi} \), giving
 \begin{align*}
-  \mel{\psi}{T(\hat{x}(t_1)) \cdots T(\hat{x}(t_2))}{\phi} &= \int \dd{x_a} \int \dd{x_b} \psi^\ast (x_b, t_b) \phi(x_a, t_a)  \ev{x(t_1)\cdots x(t_n)}_S
+  \mel{\psi}{T(\hat{x}(t_1)) \cdots \hat{x}(t_2))}{\phi} &= \int \dd{x_a} \int \dd{x_b} \psi^\ast (x_b, t_b) \phi(x_a, t_a)  \ev{x(t_1)\cdots x(t_n)}_S
 \end{align*}
 which are also known as correlation functions.
 
