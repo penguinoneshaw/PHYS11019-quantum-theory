@@ -64,11 +64,11 @@ The position operator is then \[ \hat{x} = \int x \ketbra{x} \dd{x} \] which is 
 
 \subsection{Momentum}
 We use the fourier transform to find the momentum space.
-We define states \(\ket{k}\) such that \[ \ket{k} = \frac{1}{\sqrt{2\pi}} \int e^{ikx} \ket{k} \dd{x}\] which allows us to make the identifications
+We define states \(\ket{k}\) conventionally such that \[ \ket{k} = \frac{1}{\sqrt{2\pi}} \int e^{ikx} \ket{k} \dd{x}\] which allows us to identify that
 \begin{align*}
-  \braket{x}{k} &= \frac{1}{\sqrt{2\pi}}e^{ikx} & \braket{k}{x} &= \frac{1}{\sqrt{2\pi}}e^{-ikx}
+  \braket{x}{k} &= \frac{1}{\sqrt{2\pi}}e^{ikx} & \braket{k}{x} &= \frac{1}{\sqrt{2\pi}}e^{-ikx},
 \end{align*}
-which shows that it is a unitary transformation between bases.
+in turn showing that it is a unitary transformation between bases.
 
 It's worth noting that \[ \tilde\psi(k) = \mathcal{F}\qty[\psi(x)].\]
 
@@ -91,7 +91,7 @@ The fundamental result of quantum mechanics is given by the canonical commutatio
 We now increase the number of gratings, and take it to its continuum limit.
 Firstly, we define a system with \(N\) gratings arranged one after another.
 This gives us states \( \ket{x_i, t_i} \) where the \(i\) labels the grating, so \(t_i\) is the time the \(i\)-th grating is passed.
-Using the Hilbert completeness relation, this gives us for \(N=1\) \[\braket{f}{i} = \int \braket{f}{x_1,t_1} \braket{x_1,t_1}{i}\dd{x_1}.\]
+Using the Hilbert completeness relation, this gives us \[\braket{f}{i} = \int \braket{f}{x_1,t_1} \braket{x_1,t_1}{i}\dd{x_1}\] for \(N=1\).
 Increasing \(N\) further gives us \[\braket{f}{i} = \idotsint \braket{f}{x_1,t_1} \braket{x_1,t_1}{x_2,t_2} \bra{x_2, t_2}\cdots\ket{x_n,t_n}\braket{x_n, t_n}{f}\dd{x_1}\cdots\dd{x_n}\] where the increasing number of integrals increases the precision, but makes actual calculations difficult.
 
 Defining \(\ket{i} = \ket{x_0, t_0} \) and \( \ket{f} = \ket{x_{N+1}, t_{N+1}} \) allows us to evenly space the gratings a distance \( \varepsilon \) from each other with
@@ -103,7 +103,7 @@ which then allows us to write the transition amplitude as
   \braket{x_b, t_b}{x_a, t_a} &= \qty(\prod_{n=1}^{N}\int\dd{x_n})\qty(\prod_{n=1}^{N+1}\braket{x_{n}, t_{n}}{x_{n-1}, t_{n-1}}).
 \end{align*}
 
-Finally, we define a new measure, which compactifies this notation for the \(\varepsilon \to 0 \) limit.
+Finally, we define a new measure, which compactifies this notation for the \(N \to \infty \) limit.
 This is \[ \braket{x_b, t_b}{x_a, t_a} =  \eval{\int_{x_a}^{x_b}\DD{x}\braket{x_b, t_b}{x_a, t_a}}_{x(t)}. \]
 
 \chapter{Tiny Little Things Sort Of Moving Around Not Actually That Fast\ldots{} Maybe}
@@ -530,8 +530,11 @@ which corresponds to more and more interactions you add more potential interacti
 Using this statement, we can see the first order interaction probability is
 \begin{align*}
    P(a \to b) &= \frac{1}{\hbar^2} \abs{\tilde{V}_{ba}}^2\intertext{where}
-   \tilde{V}_{ba}(t) &= \int_{t_a}^{t_b} \dd{t}V_{ba}(t) \intertext{where we have defined by convention}
-   V_{ab} &\equiv \mel{a}{V(\hat{x}, t)}{b} = \int_{-\infty}^\infty u_m^\ast(x) V(x, t) u_n(x).
+   \tilde{V}_{ba}(t) &= \int_{t_a}^{t_b} \dd{t}V_{ba}(t)
+\end{align*}
+where we have defined, by convention, that
+\begin{align*}
+ V_{ab} &\equiv \mel{a}{V(\hat{x}, t)}{b} = \int_{-\infty}^\infty u_m^\ast(x) V(x, t) u_n(x).
 \end{align*}
 
 If the perturbation is time independent, we derive Fermi's golden rule for the transition rate, \[ R = \frac{2\pi}{\hbar}\abs{V_{ba}}^2 \rho(E_b) \] which is covered extensively elsewhere.
@@ -608,7 +611,7 @@ For the propagator over all time, we define a new, cooler version which does eve
 With all of the rewriting we've done, this feels like an anticlimax, but we find that
 \begin{align*}
   \lim_{t_b\to \infty}\lim_{t_a\to -\infty}\Delta(t, t^\prime) &= \frac{1}{2i\omega}\qty(e^{-i\omega(t-t^\prime)} \theta(t-t^\prime) + e^{i\omega(t-t^\prime)} \theta(t^\prime - t))\\
-  &= \Delta_F(t- t^\prime)
+  &= \Delta_F(t- t^\prime).
 \end{align*}
 
 \chapter{Lots of Little Things Moving Around Really Rather Quickly\ldots{} Maybe}
