@@ -576,7 +576,7 @@ We expand \(\exp[\frac{i}{\hbar} S_1[x]] = \exp[-\frac{i}{\hbar} \frac{ \lambda 
   \braket{x_b, t_b}{x_a, t_a}_J &= \int_{x_a}^{x_b} \DD{x} \exp[\frac{i}{\hbar}(S_0[x]_J + S_1[x])]\\
   &= \sum_{n=0}^{\infty} \frac{1}{n!} \qty(-\frac{i\lambda}{4\hbar})^n \int_{t_a}^{t_b} \dd{\tau_1} \cdots \int_{t_a}^{t_b} \dd{\tau_n}  \int_{x_a}^{x_b} \DD{x} x(\tau_1)^4 \cdots x(\tau_2)^4 e^{\frac{i}{\hbar} S_0[x]_J} \\
   &= \sum_{n=0}^{\infty} \frac{1}{n!} \qty(-\frac{i\lambda}{4\hbar})^n \qty[\prod_{k=1}^n \int_{t_a}^{t_b} \dd{\tau_k} \qty{\frac{\hbar}{i}\fdv[k]{J(\tau_k)}}^4] \int_{x_a}^{x_b} \DD{x}  e^{\frac{i}{\hbar} S[x]_J}\\
-  &= \exp[-\frac{i\lambda}{4\hbar} \qty(\frac{\hbar}{i}\fdv[k]{J(\tau_k)})^4] F_\omega(T) \exp[\frac{i}{\hbar} S[\bar{x}]_J].
+  &= \exp[-\frac{i\lambda}{4\hbar} \int_{t_a}^{t_b} \dd{\tau_k} \qty(\frac{\hbar}{i}\fdv[k]{J(\tau_k)})^4] F_\omega(T) \exp[\frac{i}{\hbar} S[\bar{x}]_J].
 \end{align*}
 
 If we make the assumptions required to use the Feynman Propagator, we can find a general expression for the correlation functions
