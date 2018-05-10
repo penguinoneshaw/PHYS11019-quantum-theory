@@ -215,9 +215,9 @@ The forced harmonic oscillator has the Lagrangian
 and equation of motion for the classical path
 \[ \ddot{\bar{x}} + \omega^2 \bar{x} = \frac{J}{m}. \]
 
-This leaves the classical action \(S_\mathrm{cl}[\bar{x} + \eta](J) \), which helfully splits into independent terms like the unforced case, so it all works out rather nicely and we get
+This leaves the classical action \(S_\mathrm{cl}[\bar{x} + \eta]_{J} \), which helfully splits into independent terms like the unforced case, so it all works out rather nicely and we get
 \begin{equation*}
-  \braket{x_b, t_b}{x_a, t_a} = F_\omega(T)e^{\frac{i}{\hbar} S_\mathrm{cl}[\bar{x}](J)}
+  \braket{x_b, t_b}{x_a, t_a} = F_\omega(T)e^{\frac{i}{\hbar} S_\mathrm{cl}[\bar{x}]_{J}}
 \end{equation*}
 where we must calculate \(S_\mathrm{cl}\).
 
@@ -538,7 +538,7 @@ If the perturbation is time independent, we derive Fermi's golden rule for the t
 
 \chapter{Richard Feynman Sticks His Boot In}
 We go back to classical mechanics for a bit, in order to motivate the point of the exercise.
-A forced \emph{an}harmonic oscillator has an action \(S = S_0[x]_J\footnote{I'm not certain about this notation, but I know for sure and certain I don't like the one in the notes. It's also significantly different to the one I used earlier.} + S_1[x]\) with Lagrangian \[L = L_{\text{Driven SHO}} - \frac{\lambda}{4}x^4 \] and
+A forced \emph{an}harmonic oscillator has an action \(S = S_0[x]_J\footnote{I'm not certain about this notation, but I know for sure and certain I don't like the one in the notes.} + S_1[x]\) with Lagrangian \[L = L_{\text{Driven SHO}} - \frac{\lambda}{4}x^4 \] and
 \[ \qty(\pdv[2]{t} + \omega^2)x = \frac{J}{x} - \frac{\lambda}{m}x^3.\]
 
 
@@ -576,12 +576,13 @@ We expand \(\exp[\frac{i}{\hbar} S_1[x]] = \exp[-\frac{i}{\hbar} \frac{ \lambda 
   \braket{x_b, t_b}{x_a, t_a}_J &= \int_{x_a}^{x_b} \DD{x} \exp[\frac{i}{\hbar}(S_0[x]_J + S_1[x])]\\
   &= \sum_{n=0}^{\infty} \frac{1}{n!} \qty(-\frac{i\lambda}{4\hbar})^n \int_{t_a}^{t_b} \dd{\tau_1} \cdots \int_{t_a}^{t_b} \dd{\tau_n}  \int_{x_a}^{x_b} \DD{x} x(\tau_1)^4 \cdots x(\tau_2)^4 e^{\frac{i}{\hbar} S_0[x]_J} \\
   &= \sum_{n=0}^{\infty} \frac{1}{n!} \qty(-\frac{i\lambda}{4\hbar})^n \qty[\prod_{k=1}^n \int_{t_a}^{t_b} \dd{\tau_k} \qty{\frac{\hbar}{i}\fdv[k]{J(\tau_k)}}^4] \int_{x_a}^{x_b} \DD{x}  e^{\frac{i}{\hbar} S[x]_J}\\
-  &= \exp[-\frac{i\lambda}{4\hbar} \int_{t_a}^{t_b} \dd{\tau_k} \qty(\frac{\hbar}{i}\fdv{J(\tau_k)})^4] F_\omega(T) \exp[\frac{i}{\hbar} S[\bar{x}]_J].
+  &= \exp[-\frac{i\lambda}{4\hbar} \int_{t_a}^{t_b} \dd{\tau} \qty(\frac{\hbar}{i}\fdv{J(\tau)})^4] F_\omega(T) \exp[\frac{i}{\hbar} S[\bar{x}]_J].
 \end{align*}
 
 If we make the assumptions required to use the Feynman Propagator, we can find a general expression for the correlation functions
 \begin{multline*}
-  \frac{1}{F_\omega(T)} \mel{0, t_b}{T(\hat{x}(t_1)) \cdots T(\hat{x}(t_n))}{0, t_a} \\= \qty(\frac{\hbar}{i})^m \frac{\delta^m}{\delta J(t_1)\,\cdots\,\delta J(t_m)} \exp[-\frac{i\lambda}{4\hbar} \qty(\frac{\hbar}{i}\fdv[k]{J(\tau_k)})^4]\\\times \exp[\frac{i}{\hbar} \int_{t_a}^{t_b}\int_{t_a}^{t_b}J(t)\Delta(t, t^\prime)J(t^\prime)\dd{t^\prime}\dd{t}].
+  \frac{1}{F_\omega(T)} \mel{0, t_b}{T(\hat{x}(t_1)\cdots\hat{x}(t_n))}{0, t_a} \\= \qty(\frac{\hbar}{i})^m \frac{\delta^m}{\delta J(t_1)\,\cdots\,\delta J(t_m)} \exp[-\frac{i\lambda}{4\hbar} \int_{t_a}^{t_b} \dd{\tau} \qty(\frac{\hbar}{i}\fdv{J(\tau)})^4]\\
+  \times \exp[\frac{i}{\hbar} \int_{t_a}^{t_b}\int_{t_a}^{t_b}J(t)\Delta(t, t^\prime)J(t^\prime)\dd{t^\prime}\dd{t}].
 \end{multline*}
 
 \section{Special Results}
