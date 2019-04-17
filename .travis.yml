@@ -3,9 +3,8 @@ services:
 - docker
 language: generic
 script:
-- docker pull blang/latex:full
-- docker run --rm -i --user="$(id -u):$(id -g)" --net=none -v "$PWD":/data blang/latex:full
-  latexmk -f -interaction=batchmode -pdf Quantum_Revision
+- docker build -t penguinoneshaw/latex .
+- docker run --rm -i --user="$(id -u):$(id -g)" --net=none -v "$PWD":/data penguinoneshaw/latex latexmk -f -interaction=batchmode -pdf Quantum_Revision
 deploy:
   provider: releases
   skip_cleanup: true
