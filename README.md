@@ -28,4 +28,4 @@ Where possible, integrals are written with the 'dx' at the end, since from my pe
 
 [![Build Status](https://travis-ci.org/penguinoneshaw/PHYS11019-quantum-theory.svg?branch=master)](https://travis-ci.org/penguinoneshaw/PHYS11019-quantum-theory)
 
-The current committed version in the master branch available under releases.
+The most recent tagged version in the master branch available under releases.

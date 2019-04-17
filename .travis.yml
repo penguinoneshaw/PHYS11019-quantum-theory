@@ -6,12 +6,6 @@ script:
 - docker build -t penguinoneshaw/latex .
 - docker run --rm -i --user="$(id -u):$(id -g)" --net=none -v "$PWD":/data penguinoneshaw/latex latexmk -f -interaction=batchmode -pdf Quantum_Revision
 
-before_deploy:
-  # Set up git user name and tag this commit
-  - git config --local user.name "James Shaw"
-  - git config --local user.email "penguinoneshaw@gmail.com"
-  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-  - git tag $TRAVIS_TAG
 deploy:
   provider: releases
   skip_cleanup: true
@@ -19,4 +13,5 @@ deploy:
     secure: Yf0cog8S/xbebe56qUkTproPvwUNCd81VyW/DqaJwpSkOcIC6sHrbUFNAXDh8rruULLJjg3AGGIS2aH8lwaQN/t6F2WreFsqzMn7sWf6pWCMGA+tn8jy6mMNrJV7ZJQL/RV02nWddM0asGv+e6bvGhb2df/7LUTFQA+fhMQqlATxvMOVJal8OfmZNFxxk48guLtcxnXXbyRs42VAcxQmD2jV0BtrPV4uhVmDEixv0ITL22KBg9bymPuqi1MVFou6NyzEtVm5st/+ZbGMa08TCCX1kDCxOpD2ri1umjlrtoOEwR0mP45h50fuag2wB4akw38gfdNqsClWWQcxwoFzYRRWwqWAZi8Rtp4R05s0IElvGQZMYDq20fADBAWLEGKupjVQr2LC7gMZCXRFXpC5re1A7XDNwy5VbxYOJUNtzpHHseJGhk4esWtT280cr/DOkLWZKWPMs8rOQUbbrTYy5ucGtPeLM40nTVFhL2w5YDxC7ZFlzn9Yr/7dYRctzwNDSajrVp/vdtY06iE0NNTIDkYLHaMuIBbFeuyJhsQFvkPQJkjf606AJ+B8m+lUjESYBrlQXjVgeXNptl+pz9jeEqMKHuXyvxK3bFl+4Ux+a+PEQL9+S2HVtNE82caaGcP5aCTxfY/yk7/HmAC3wEjw1AdrnO+WZlS2c5ELcFcLf5Q=
   file: Quantum_Revision.pdf
   on:
+    tag: true
     repo: penguinoneshaw/PHYS11019-quantum-theory
