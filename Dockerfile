@@ -5,7 +5,7 @@ LABEL author="James Shaw <penguinoneshaw@gmail.com>"
 
 # Collection of recipes for common setups
 RUN apt-get update\
-    && apt-get install -qy texlive latexmk biber
+    && apt-get install -qy texlive latexmk biber texlive-science texlive-fonts-extra texlive-lang-english texlive-pictures texlive-pstricks
 
 WORKDIR /data
 VOLUME ["/data"]
