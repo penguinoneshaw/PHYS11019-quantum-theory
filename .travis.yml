@@ -4,7 +4,7 @@ services:
 language: generic
 script:
 - docker pull blang/latex:full
-- docker run --rm -i --user="$(id -u):$(id -g)" --net=none -v "$PWD":/data blang/latex:ubuntu
+- docker run --rm -i --user="$(id -u):$(id -g)" --net=none -v "$PWD":/data blang/latex:full
   latexmk -f -interaction=batchmode -pdf Quantum_Revision
 deploy:
   provider: releases
